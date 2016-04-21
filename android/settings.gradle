@@ -1,0 +1,3 @@
+rootProject.name = 'react-native-custom-tabs'
+
+include ':library'
