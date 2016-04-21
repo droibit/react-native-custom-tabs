@@ -80,7 +80,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             promise.reject(new JSApplicationIllegalArgumentException("Invalid URL: " + url));
             return;
         }
-        if (!url.startsWith("http://") || !url.startsWith("https://")) {
+
+        final Uri uri = Uri.parse(url);
+        if (!uri.getScheme().equals("http") && !uri.getScheme().equals("https")) {
             promise.reject(new JSApplicationIllegalArgumentException("Allow only http or https: " + url));
             return;
         }
@@ -123,7 +125,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
 
         try {
             if (getCurrentActivity() != null) {
-                builder.build().launchUrl(getCurrentActivity(), Uri.parse(url));
+                builder.build().launchUrl(getCurrentActivity(), uri);
+                promise.resolve(true);
             }
             // TODO: activity == null
         } catch (Exception e) {
