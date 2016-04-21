@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/droibit/react-native-custom-tabs",
+    "url": "https://github.com/droibit/react-native-custom-tabs"
   },
   "license": "MIT",
   "scripts": {
