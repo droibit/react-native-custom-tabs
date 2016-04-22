@@ -1,49 +1,16 @@
-
 'use strict';
 
-import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import {Platform} from 'react-native';
+import CustomTabsIOS from './src/CustomTabsIOS';
+import CustomTabsAndroid, {
+  ANIMATIONS_SLIDE,
+  ANIMATIONS_FADE
+} from './src/CustomTabsAndroid';
 
-class ReactNativeCustomTabs extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+import type {TabsOptionAndroid} from './src/CustomTabsAndroid';
+import type {TabsOptionIOS} from './src/CustomTabsIOS';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+export type TabsOption = TabsOptionAndroid | TabsOptionIOS;
 
-AppRegistry.registerComponent('ReactNativeCustomTabs', () => ReactNativeCustomTabs);
+const CustomTabs = Platform.OS === 'android' ? CustomTabsAndroid : CustomTabsIOS;
+export {CustomTabs, ANIMATIONS_SLIDE, ANIMATIONS_FADE};
