@@ -1,2 +1,5 @@
 example/
+typings/
 .idea/
+.watchmanconfig
+.eslintrc
