@@ -1,15 +1,15 @@
 //
-//  DBCusomTabsManager.m
+//  DBCustomTabsManager.m
 //  ReactNativeCustomTabs
 //
 //  Created by Shinya Kumagai.
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
-#import "DBCusomTabsManager.h"
+#import "DBCustomTabsManager.h"
 #import "RCTUtils.h"
 
-@implementation DBCusomTabsManager
+@implementation DBCustomTabsManager
 
 RCT_EXPORT_MODULE()
 

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA7118851CC916080087DF95 /* DBCusomTabsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7118551CC90B700087DF95 /* DBCusomTabsManager.m */; };
+		DA7118851CC916080087DF95 /* DBCustomTabsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7118551CC90B700087DF95 /* DBCustomTabsManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,8 +108,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		DA7118541CC90B700087DF95 /* DBCusomTabsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBCusomTabsManager.h; path = ReactNativeCustomTabs/DBCusomTabsManager.h; sourceTree = "<group>"; };
-		DA7118551CC90B700087DF95 /* DBCusomTabsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBCusomTabsManager.m; path = ReactNativeCustomTabs/DBCusomTabsManager.m; sourceTree = "<group>"; };
+		DA7118541CC90B700087DF95 /* DBCustomTabsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBCustomTabsManager.h; path = ReactNativeCustomTabs/DBCustomTabsManager.h; sourceTree = "<group>"; };
+		DA7118551CC90B700087DF95 /* DBCustomTabsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBCustomTabsManager.m; path = ReactNativeCustomTabs/DBCustomTabsManager.m; sourceTree = "<group>"; };
 		DA7118681CC9158A0087DF95 /* libDBCustomTabs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDBCustomTabs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -200,8 +200,8 @@
 		13B07FAE1A68108700A75B9A /* ReactNativeCustomTabs */ = {
 			isa = PBXGroup;
 			children = (
-				DA7118541CC90B700087DF95 /* DBCusomTabsManager.h */,
-				DA7118551CC90B700087DF95 /* DBCusomTabsManager.m */,
+				DA7118541CC90B700087DF95 /* DBCustomTabsManager.h */,
+				DA7118551CC90B700087DF95 /* DBCustomTabsManager.m */,
 			);
 			name = ReactNativeCustomTabs;
 			sourceTree = "<group>";
@@ -439,7 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA7118851CC916080087DF95 /* DBCusomTabsManager.m in Sources */,
+				DA7118851CC916080087DF95 /* DBCustomTabsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

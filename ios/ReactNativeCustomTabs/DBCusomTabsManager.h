@@ -1,5 +1,5 @@
 //
-//  DBCusomTabsManager.h
+//  DBCustomTabsManager.h
 //  ReactNativeCustomTabs
 //
 //  Created by Shinya Kumagai.
@@ -8,6 +8,6 @@
 
 #import "RCTBridgeModule.h"
 
-@interface DBCusomTabsManager : NSObject<RCTBridgeModule>
+@interface DBCustomTabsManager : NSObject<RCTBridgeModule>
 
 @end
