@@ -14,5 +14,5 @@ android {
 
 dependencies {
     compile 'com.android.support:customtabs:23.3.0'
-    compile "com.facebook.react:react-native:+"  // From node_modules
+    compile "com.facebook.react:react-native:0.24.1"  // From node_modules
 }
