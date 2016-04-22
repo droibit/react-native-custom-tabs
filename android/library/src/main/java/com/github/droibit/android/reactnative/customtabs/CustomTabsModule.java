@@ -49,7 +49,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_ANIMATIONS_FADE, ANIMATIONS_FADE);
     }
 
-    private static final String MODULE_NAME = "CustomTabAndroid";
+    private static final String MODULE_NAME = "CustomTabsManager";
 
     public CustomTabsModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -75,7 +75,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
      * @param url the URL to open
      */
     @ReactMethod
-    public void openUrl(String url, ReadableMap options, Promise promise) {
+    public void openURL(String url, ReadableMap options, Promise promise) {
         if (TextUtils.isEmpty(url)) {
             promise.reject(new JSApplicationIllegalArgumentException("Invalid URL: " + url));
             return;
