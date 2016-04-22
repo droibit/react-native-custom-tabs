@@ -1,3 +1,9 @@
+/**
+ * TODO: add license
+ *
+ * @providesModule CustomTabsAndroid
+ * @flow
+ */
 'use strict';
 
 import {Platform} from 'react-native';
