@@ -1,31 +1,45 @@
+/// <reference path="../../typings/main.d.ts" />
+
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * @flow
  */
 
+import {CustomTabs, ANIMATIONS_SLIDE} from 'react-native-custom-tabs';
 import React, {
   AppRegistry,
   Component,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native';
 
-class example extends Component {
+class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+        <TouchableHighlight
+          underlayColor={'#CFD8DC'}
+          onPress={() => this.openGoogle()} >
+          <Text style={styles.link}>
+            https://www.google.com
+          </Text>
+        </TouchableHighlight>
       </View>
     );
+  }
+
+  openGoogle() {
+    CustomTabs.build({
+      toolbarColor: '#607D8B',
+      enableUrlBarHiding: true,
+      showPageTitle: true,
+      enableDefaultShare: true,
+      animations: ANIMATIONS_SLIDE
+    }).openURL('https://www.google.com')
   }
 }
 
@@ -41,11 +55,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  link: {
+    color: 'crimson',
+  }
 });
 
-AppRegistry.registerComponent('example', () => example);
+AppRegistry.registerComponent('Example', () => Example);

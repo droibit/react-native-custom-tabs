@@ -1,8 +1,10 @@
 package com.example;
 
 import com.facebook.react.ReactActivity;
+import com.github.droibit.android.reactnative.customtabs.CustomTabsPackage;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.github.droibit.android.reactnative.customtabs.CustomTabsPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +17,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "example";
+        return "Example";
     }
 
     /**
@@ -34,7 +36,9 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new MainReactPackage()
+            new MainReactPackage(),
+            new CustomTabsPackage(),
+            new CustomTabsPackage()
         );
     }
 }

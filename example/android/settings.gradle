@@ -1,3 +1,6 @@
 rootProject.name = 'example'
 
 include ':app'
+
+include ':library'
+project(':library').projectDir = new File(rootProject.projectDir, '../../android/library')
