@@ -10,7 +10,7 @@ import {NativeModules} from 'react-native';
 
 export type TabsOptionIOS = {};
 
-const CustomTabsManager = NativeModules.DBCustomTabManager;
+const CustomTabsManager = NativeModules.DBCustomTabsManager;
 
 export default class CustomTabsIOS {
 

@@ -4,30 +4,36 @@
  * @flow
  */
 
+import {CustomTabs} from 'react-native-custom-tabs';
 import React, {
   AppRegistry,
   Component,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native';
 
-class example extends Component {
+class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <TouchableHighlight
+          underlayColor={'#CFD8DC'}
+          onPress={() => this.openGoogle()} >
+          <Text style={styles.link}>
+            https://www.google.com
+          </Text>
+        </TouchableHighlight>
       </View>
     );
+  }
+
+  openGoogle() {
+    CustomTabs.build().openURL('https://www.google.com')
   }
 }
 
@@ -43,11 +49,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  link: {
+    color: 'crimson',
+  }
 });
 
-AppRegistry.registerComponent('example', () => example);
+AppRegistry.registerComponent('Example', () => Example);
