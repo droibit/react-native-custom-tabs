@@ -2,5 +2,5 @@ rootProject.name = 'example'
 
 include ':app'
 
-include ':library'
-project(':library').projectDir = new File(rootProject.projectDir, '../../android/library')
+include ':react-native-custom-tabs'
+project(':react-native-custom-tabs').projectDir = new File(rootProject.projectDir, '../../android')
