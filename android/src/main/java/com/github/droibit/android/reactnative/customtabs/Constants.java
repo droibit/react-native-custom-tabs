@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by kumagai on 16/04/25.
  */
-/* package */ class ChromePackage {
+/* package */ class Constants {
 
     /* package */ static final String PACKAGE_STABLE = "com.android.chrome";
     /* package */ static final String PACKAGE_BETA = "com.chrome.beta";
@@ -17,4 +17,7 @@ import java.util.List;
             PACKAGE_BETA,
             PACKAGE_DEV,
             PACKAGE_LOCAL);
+
+    /* package */  static final String ACTION_CUSTOM_TABS_CONNECTION =
+            "android.support.customtabs.action.CustomTabsService";
 }

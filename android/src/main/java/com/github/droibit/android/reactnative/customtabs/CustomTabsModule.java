@@ -26,7 +26,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 import static android.content.pm.PackageManager.*;
-import static com.github.droibit.android.reactnative.customtabs.ChromePackage.*;
+import static com.github.droibit.android.reactnative.customtabs.Constants.*;
 
 /**
  * CustomTabs module.
@@ -115,6 +115,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
 
     @VisibleForTesting
     /* package */ boolean canOpen(Uri uri) {
+        // Whether the browser has been installed.
         final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         final PackageManager pm = getReactApplicationContext().getPackageManager();
         final List<ResolveInfo> resolvedActivities = pm.queryIntentActivities(intent, 0);
@@ -124,6 +125,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     @Nullable
     @VisibleForTesting
     /* package */ String packageNameToUse(boolean ignoreDefault) {
+
+        // TODO: ignore default browser
+
         final PackageManager pm = getReactApplicationContext().getPackageManager();
         final List<ApplicationInfo> installedApps = pm.getInstalledApplications(GET_META_DATA);
 
@@ -140,11 +144,20 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
 
         // Stable comes first.
         for (String chromePackage : CHROME_PACKAGES) {
-            if (installedChromes.contains(chromePackage)) {
+            if (installedChromes.contains(chromePackage) &&
+                    supportedCustomTabs(pm, chromePackage)) {
                 return chromePackage;
             }
         }
         return null;
+    }
+
+    @VisibleForTesting
+    /* package */  boolean supportedCustomTabs(PackageManager pm, String chromePackage) {
+        // Whether support Chrome Custom Tabs.
+        final Intent serviceIntent = new Intent(ACTION_CUSTOM_TABS_CONNECTION)
+                .setPackage(chromePackage);
+        return pm.resolveService(serviceIntent, 0) != null;
     }
 
     @VisibleForTesting
@@ -153,7 +166,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
 
         final int priority = option.hasKey(KEY_PRIORITY)
                 ? option.getInt(KEY_PRIORITY) : PRIORITY_DEFAULT;
-
+        final String chromePackage = packageNameToUse(priority == PRIORITY_HIGH);
         // TODO:
 
         if (option.hasKey(KEY_TOOLBAR_COLOR)) {
