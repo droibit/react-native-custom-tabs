@@ -95,42 +95,41 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        if (!canOpen(uri)) {
-            promise.resolve(false);
-            return;
-        }
-
-        final CustomTabsIntent customTabsIntent = buildIntent(option, promise);
         try {
+            final CustomTabsIntent customTabsIntent = buildIntent(uri, option);
             if (getCurrentActivity() != null) {
                 customTabsIntent.launchUrl(getCurrentActivity(), uri);
                 promise.resolve(true);
+            } else {
+                promise.resolve(false);
             }
-            // FIXME: activity == null
+        } catch (JSApplicationIllegalArgumentException e) {
+            // If build option is invalid.
+            promise.reject(e);
         } catch (Exception e) {
             promise.reject(new JSApplicationIllegalArgumentException(
                     "Could not open URL '" + url + "': " + e.getMessage()));
         }
     }
 
-    @VisibleForTesting
-    /* package */ boolean canOpen(Uri uri) {
-        // Whether the browser has been installed.
-        final Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        final PackageManager pm = getReactApplicationContext().getPackageManager();
-        final List<ResolveInfo> resolvedActivities = pm.queryIntentActivities(intent, 0);
-        return !resolvedActivities.isEmpty();
-    }
-
     @Nullable
     @VisibleForTesting
-    /* package */ String packageNameToUse(boolean ignoreDefault) {
-
-        // TODO: ignore default browser
-
+    /* package */ String packageNameToUse(Uri uri) {
         final PackageManager pm = getReactApplicationContext().getPackageManager();
-        final List<ApplicationInfo> installedApps = pm.getInstalledApplications(GET_META_DATA);
 
+        // Get default VIEW intent handler.
+        final Intent activityIntent = new Intent(Intent.ACTION_VIEW, uri);
+        final ResolveInfo defaultViewHandlerInfo = pm.resolveActivity(activityIntent, 0);
+        // If Chrome is default browser, use it.
+        if (defaultViewHandlerInfo != null) {
+            final String defaultPackageName = defaultViewHandlerInfo.activityInfo.packageName;
+            if (CHROME_PACKAGES.contains(defaultPackageName) &&
+                    supportedCustomTabs(pm, defaultPackageName)) {
+                return defaultPackageName;
+            }
+        }
+
+        final List<ApplicationInfo> installedApps = pm.getInstalledApplications(GET_META_DATA);
         final List<String> installedChromes = new ArrayList<>(CHROME_PACKAGES.size());
         for (ApplicationInfo app : installedApps) {
             if (CHROME_PACKAGES.contains(app.packageName)) {
@@ -161,21 +160,16 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     }
 
     @VisibleForTesting
-    /* package */ CustomTabsIntent buildIntent(ReadableMap option, Promise promise) {
+    /* package */ CustomTabsIntent buildIntent(Uri uri, ReadableMap option) {
         final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-
-        final int priority = option.hasKey(KEY_PRIORITY)
-                ? option.getInt(KEY_PRIORITY) : PRIORITY_DEFAULT;
-        final String chromePackage = packageNameToUse(priority == PRIORITY_HIGH);
-        // TODO:
 
         if (option.hasKey(KEY_TOOLBAR_COLOR)) {
             final String colorString = option.getString(KEY_TOOLBAR_COLOR);
             try {
                 builder.setToolbarColor(Color.parseColor(colorString));
             } catch (IllegalArgumentException e) {
-                promise.reject(new JSApplicationIllegalArgumentException(
-                        "Invalid toolbar color '" + colorString + "': " + e.getMessage()));
+                throw new JSApplicationIllegalArgumentException(
+                        "Invalid toolbar color '" + colorString + "': " + e.getMessage());
             }
         }
         if (option.hasKey(KEY_ENABLE_URL_BAR_HIDING) &&
@@ -189,6 +183,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
                 option.getBoolean(KEY_DEFAULT_SHARE_MENU_ITEM)) {
             builder.addDefaultShareMenuItem();
         }
+
+        // TODO: If it does not launch Chrome, animation is unnecessary?
+
         if (option.hasKey(KEY_ANIMATIONS)) {
             final Context context = getReactApplicationContext();
             final int animation = option.getInt(KEY_ANIMATIONS);
@@ -203,6 +200,15 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
                     break;
             }
         }
-        return builder.build();
+        final CustomTabsIntent customTabsIntent = builder.build();
+
+        if (option.hasKey(KEY_PRIORITY) &&
+                option.getInt(KEY_PRIORITY) == PRIORITY_HIGH) {
+            final String chromePackage = packageNameToUse(uri);
+            if (chromePackage != null) {
+                customTabsIntent.intent.setPackage(chromePackage);
+            }
+        }
+        return customTabsIntent;
     }
 }
