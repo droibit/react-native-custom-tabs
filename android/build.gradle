@@ -13,6 +13,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:customtabs:23.3.0'
     compile "com.facebook.react:react-native:+"  // From node_modules
+    compile 'com.github.droibit.customtabslauncher:launcher:1.0.1'
 }

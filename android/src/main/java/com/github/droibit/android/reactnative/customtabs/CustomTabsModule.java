@@ -1,5 +1,6 @@
 package com.github.droibit.android.reactnative.customtabs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
 
+import com.droibit.android.customtabs.launcher.CustomTabsLauncher;
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -38,13 +40,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     private static final String KEY_SHOW_PAGE_TITLE = "showPageTitle";
     private static final String KEY_DEFAULT_SHARE_MENU_ITEM = "enableDefaultShare";
     private static final String KEY_ANIMATIONS = "animations";
-    private static final String KEY_PRIORITY = "priority";
 
     private static final int ANIMATIONS_SLIDE = 0;
     private static final int ANIMATIONS_FADE = 1;
-
-    private static final int PRIORITY_DEFAULT = 0;
-    private static final int PRIORITY_HIGH = 1;
 
     private static final Map<String, Object> CONSTANTS;
     static {
@@ -53,7 +51,6 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_ENABLE_URL_BAR_HIDING, KEY_ENABLE_URL_BAR_HIDING);
         CONSTANTS.put(KEY_SHOW_PAGE_TITLE, KEY_SHOW_PAGE_TITLE);
         CONSTANTS.put(KEY_DEFAULT_SHARE_MENU_ITEM, KEY_DEFAULT_SHARE_MENU_ITEM);
-        CONSTANTS.put(KEY_PRIORITY, KEY_PRIORITY);
         CONSTANTS.put(KEY_ANIMATIONS, KEY_ANIMATIONS);
     }
 
@@ -96,9 +93,10 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         }
 
         try {
-            final CustomTabsIntent customTabsIntent = buildIntent(uri, option);
-            if (getCurrentActivity() != null) {
-                customTabsIntent.launchUrl(getCurrentActivity(), uri);
+            final CustomTabsIntent customTabsIntent = buildIntent(option);
+            final Activity activity = getCurrentActivity();
+            if (activity != null) {
+                CustomTabsLauncher.launch(activity, customTabsIntent, uri);
                 promise.resolve(true);
             } else {
                 promise.resolve(false);
@@ -112,55 +110,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         }
     }
 
-    @Nullable
     @VisibleForTesting
-    /* package */ String packageNameToUse(Uri uri) {
-        final PackageManager pm = getReactApplicationContext().getPackageManager();
-
-        // Get default VIEW intent handler.
-        final Intent activityIntent = new Intent(Intent.ACTION_VIEW, uri);
-        final ResolveInfo defaultViewHandlerInfo = pm.resolveActivity(activityIntent, 0);
-        // If Chrome is default browser, use it.
-        if (defaultViewHandlerInfo != null) {
-            final String defaultPackageName = defaultViewHandlerInfo.activityInfo.packageName;
-            if (CHROME_PACKAGES.contains(defaultPackageName) &&
-                    supportedCustomTabs(pm, defaultPackageName)) {
-                return defaultPackageName;
-            }
-        }
-
-        final List<ApplicationInfo> installedApps = pm.getInstalledApplications(GET_META_DATA);
-        final List<String> installedChromes = new ArrayList<>(CHROME_PACKAGES.size());
-        for (ApplicationInfo app : installedApps) {
-            if (CHROME_PACKAGES.contains(app.packageName)) {
-                installedChromes.add(app.packageName);
-            }
-        }
-
-        if (installedChromes.isEmpty()) {
-            return null;
-        }
-
-        // Stable comes first.
-        for (String chromePackage : CHROME_PACKAGES) {
-            if (installedChromes.contains(chromePackage) &&
-                    supportedCustomTabs(pm, chromePackage)) {
-                return chromePackage;
-            }
-        }
-        return null;
-    }
-
-    @VisibleForTesting
-    /* package */  boolean supportedCustomTabs(PackageManager pm, String chromePackage) {
-        // Whether support Chrome Custom Tabs.
-        final Intent serviceIntent = new Intent(ACTION_CUSTOM_TABS_CONNECTION)
-                .setPackage(chromePackage);
-        return pm.resolveService(serviceIntent, 0) != null;
-    }
-
-    @VisibleForTesting
-    /* package */ CustomTabsIntent buildIntent(Uri uri, ReadableMap option) {
+    /* package */ CustomTabsIntent buildIntent(ReadableMap option) {
         final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
 
         if (option.hasKey(KEY_TOOLBAR_COLOR)) {
@@ -200,15 +151,6 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
                     break;
             }
         }
-        final CustomTabsIntent customTabsIntent = builder.build();
-
-        if (option.hasKey(KEY_PRIORITY) &&
-                option.getInt(KEY_PRIORITY) == PRIORITY_HIGH) {
-            final String chromePackage = packageNameToUse(uri);
-            if (chromePackage != null) {
-                customTabsIntent.intent.setPackage(chromePackage);
-            }
-        }
-        return customTabsIntent;
+        return builder.build();
     }
 }
