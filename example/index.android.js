@@ -25,7 +25,7 @@ class Example extends Component {
           title={'React Native Custom Tabs'}
           titleColor={'#FFFFFF'}
           style={styles.toolbar} />
-        <View style={styles.subContainer}>
+        <View style={styles.testArea}>
           <Text style={styles.welcome}>
             Click on the link below!
           </Text>
@@ -42,13 +42,17 @@ class Example extends Component {
   }
 
   openGoogle() {
-    CustomTabs.build({
+    CustomTabs.openURL('https://www.google.com', {
       toolbarColor: '#607D8B',
       enableUrlBarHiding: true,
       showPageTitle: true,
       enableDefaultShare: true,
       animations: ANIMATIONS_SLIDE
-    }).openURL('https://www.google.com')
+    }).then((launched: boolean) => {
+      console.log(`Launched custom tabs: ${launched}`);
+    }).catch(err => {
+      console.error('An error occurred', err)
+    });
   }
 }
 
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  subContainer: {
+  testArea: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

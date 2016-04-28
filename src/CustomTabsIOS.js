@@ -8,20 +8,24 @@
 
 import {NativeModules} from 'react-native';
 
-export type TabsOptionIOS = {};
+/**
+ * Chrome for iOS does not support Custom Tabs.
+ */
+export type TabOptionIOS = {};
 
-const CustomTabsManager = NativeModules.DBCustomTabsManager;
+const CustomTabManager = NativeModules.DBCustomTabsManager;
 
+/**
+ * TODO
+ */
 export default class CustomTabsIOS {
 
-  constructor(options: TabsOptionIOS = {}) {
-  }
-
-  openURL(url: string): Promise<boolean> {
+  /**
+   * Opens the URL on a Custom Tab.
+   *
+   * @param url the Uri to be opened.
+   */
+  static openURL(url: string, option: TabOptionIOS = {}): Promise<boolean> {
     return CustomTabsManager.openURL(url)
-  }
-
-  static build(options: TabsOptionIOS = {}): CustomTabsIOS {
-    return new CustomTabsIOS(options);
   }
 }

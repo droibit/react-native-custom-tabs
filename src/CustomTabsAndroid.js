@@ -8,7 +8,10 @@
 
 import {NativeModules} from 'react-native';
 
-export type TabsOptionAndroid = {
+/**
+ * Options to customize Custom Tabs of look & feel.
+ */
+export type TabOptionAndroid = {
   toolbarColor?: string;
   enableUrlBarHiding?: boolean;
   showPageTitle?: boolean;
@@ -16,23 +19,32 @@ export type TabsOptionAndroid = {
   animations?: number;
 };
 
+/**
+ * Start and exit animation of Custom Tabs.
+ * Slide in from left at start, Slide out to right.at exit.
+ */
 export const ANIMATIONS_SLIDE: number = 0;
+
+/**
+ * Start and exit animation of Custom Tabs.
+ * Fade in at start, Fade out  at exit.
+ */
 export const ANIMATIONS_FADE: number = 1;
 
 const CustomTabsManager = NativeModules.CustomTabsManager;
 
+/**
+ * TODO
+ */
 export default class CustomTabsAndroid {
-  options: TabsOptionAndroid;
 
-  constructor(options: TabsOptionAndroid = {}) {
-    this.options = options;
-  }
-
-  openURL(url: string): Promise<boolean> {
-    return CustomTabsManager.openURL(url, this.options)
-  }
-
-  static build(options: TabsOptionAndroid = {}): CustomTabsAndroid {
-    return new CustomTabsAndroid(options);
+  /**
+   * Opens the URL on a Custom Tab.
+   *
+   * @param url the Uri to be opened.
+   * @param option the Option to customize Custom Tabs of look & feel.
+   */
+  static openURL(url: string, option: TabOptionAndroid = {}): Promise<boolean> {
+    return CustomTabsManager.openURL(url, option)
   }
 }

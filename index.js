@@ -13,10 +13,10 @@ import CustomTabsAndroid, {
   ANIMATIONS_FADE
 } from './src/CustomTabsAndroid';
 
-import type {TabsOptionAndroid} from './src/CustomTabsAndroid';
-import type {TabsOptionIOS} from './src/CustomTabsIOS';
+import type {TabOptionAndroid} from './src/CustomTabsAndroid';
+import type {TabOptionIOS} from './src/CustomTabsIOS';
 
-export type TabsOption = TabsOptionAndroid | TabsOptionIOS;
+export type TabOption = TabOptionAndroid | TabOptionIOS;
 
 const CustomTabs = Platform.OS === 'android' ? CustomTabsAndroid : CustomTabsIOS;
 export {CustomTabs, ANIMATIONS_SLIDE, ANIMATIONS_FADE};
