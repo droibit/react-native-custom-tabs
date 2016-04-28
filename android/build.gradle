@@ -1,5 +1,9 @@
 apply plugin: "com.android.library"
 
+ext {
+    powermock_version = '1.6.4'
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -14,5 +18,11 @@ android {
 
 dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
-    compile 'com.github.droibit.customtabslauncher:launcher:1.0.1'
+    compile 'com.github.droibit.customtabslauncher:launcher:1.0.2'
+
+    testCompile 'junit:junit:4.12'
+    testCompile "org.powermock:powermock:$powermock_version"
+    testCompile "org.powermock:powermock-module-junit4:$powermock_version"
+//    testCompile "org.powermock:powermock-module-junit4-rule-agent:$powermock_version"
+    testCompile "org.powermock:powermock-api-mockito:$powermock_version"
 }

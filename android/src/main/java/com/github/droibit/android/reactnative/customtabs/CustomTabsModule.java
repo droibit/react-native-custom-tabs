@@ -32,6 +32,8 @@ import static com.github.droibit.android.reactnative.customtabs.Constants.*;
 
 /**
  * CustomTabs module.
+ *
+ * @author kumagai
  */
 public class CustomTabsModule extends ReactContextBaseJavaModule {
 
@@ -45,6 +47,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     private static final int ANIMATIONS_FADE = 1;
 
     private static final Map<String, Object> CONSTANTS;
+
     static {
         CONSTANTS = MapBuilder.newHashMap();
         CONSTANTS.put(KEY_TOOLBAR_COLOR, KEY_TOOLBAR_COLOR);
@@ -81,22 +84,25 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void openURL(String url, ReadableMap option, Promise promise) {
-        if (TextUtils.isEmpty(url)) {
+        if (url == null || url.equals("")) {
             promise.reject(new JSApplicationIllegalArgumentException("Invalid URL: " + url));
             return;
         }
 
-        final Uri uri = Uri.parse(url);
-        if (!uri.getScheme().equals("http") && !uri.getScheme().equals("https")) {
+        if (httpOrHttpsScheme(url)) {
             promise.reject(new JSApplicationIllegalArgumentException("Allow only http or https: " + url));
             return;
         }
 
         try {
-            final CustomTabsIntent customTabsIntent = buildIntent(option);
+            final CustomTabsIntent customTabsIntent = buildIntent(
+                    getReactApplicationContext(),
+                    new CustomTabsIntent.Builder(),
+                    option
+            );
             final Activity activity = getCurrentActivity();
             if (activity != null) {
-                CustomTabsLauncher.launch(activity, customTabsIntent, uri);
+                CustomTabsLauncher.launch(activity, customTabsIntent, url);
                 promise.resolve(true);
             } else {
                 promise.resolve(false);
@@ -111,9 +117,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     }
 
     @VisibleForTesting
-    /* package */ CustomTabsIntent buildIntent(ReadableMap option) {
-        final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-
+    /* package */ CustomTabsIntent buildIntent(Context context,
+                                               CustomTabsIntent.Builder builder,
+                                               ReadableMap option) {
         if (option.hasKey(KEY_TOOLBAR_COLOR)) {
             final String colorString = option.getString(KEY_TOOLBAR_COLOR);
             try {
@@ -138,19 +144,33 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         // TODO: If it does not launch Chrome, animation is unnecessary?
 
         if (option.hasKey(KEY_ANIMATIONS)) {
-            final Context context = getReactApplicationContext();
             final int animation = option.getInt(KEY_ANIMATIONS);
             switch (animation) {
                 case ANIMATIONS_SLIDE:
-                    builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
-                            .setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    applySlideAnimation(context, builder);
                     break;
                 case ANIMATIONS_FADE:
-                    builder.setStartAnimations(context, android.R.anim.fade_in, android.R.anim.fade_out)
-                            .setExitAnimations(context, android.R.anim.fade_out, android.R.anim.fade_in);
+                    applyFadeAnimation(context, builder);
                     break;
             }
         }
         return builder.build();
+    }
+
+    @VisibleForTesting
+    /* package */ boolean httpOrHttpsScheme(String url) {
+        return url.startsWith("http") || url.startsWith("https");
+    }
+
+    @VisibleForTesting
+    /* package */ void applySlideAnimation(Context context, CustomTabsIntent.Builder builder) {
+        builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
+                .setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    }
+
+    @VisibleForTesting
+    /* package */ void applyFadeAnimation(Context context, CustomTabsIntent.Builder builder) {
+        builder.setStartAnimations(context, android.R.anim.fade_in, android.R.anim.fade_out)
+                .setExitAnimations(context, android.R.anim.fade_out, android.R.anim.fade_in);
     }
 }
