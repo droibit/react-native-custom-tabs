@@ -9,6 +9,8 @@ import React, {
   AppRegistry,
   Component,
   StyleSheet,
+  StatusBar,
+  ToolbarAndroid,
   Text,
   TouchableHighlight,
   View
@@ -18,16 +20,23 @@ class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <TouchableHighlight
-          underlayColor={'#CFD8DC'}
-          onPress={() => this.openGoogle()} >
-          <Text style={styles.link}>
-            https://www.google.com
+        <StatusBar backgroundColor={'#455A64'} />
+        <ToolbarAndroid
+          title={'React Native Custom Tabs'}
+          titleColor={'#FFFFFF'}
+          style={styles.toolbar} />
+        <View style={styles.subContainer}>
+          <Text style={styles.welcome}>
+            Click on the link below!
           </Text>
-        </TouchableHighlight>
+          <TouchableHighlight
+            underlayColor={'#CFD8DC'}
+            onPress={() => this.openGoogle()} >
+            <Text style={styles.link}>
+              https://www.google.com
+            </Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
@@ -45,6 +54,9 @@ class Example extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
+  },
+  subContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -57,6 +69,10 @@ const styles = StyleSheet.create({
   },
   link: {
     color: 'crimson',
+  },
+  toolbar: {
+    backgroundColor: '#607D8B',
+    height: 56
   }
 });
 
