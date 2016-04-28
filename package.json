@@ -1,8 +1,12 @@
 {
   "name": "react-native-custom-tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Chrome Custom Tabs for React Native.",
-  "keywords": [],
+  "keywords": [
+    "react-native",
+    "chrome",
+    "custom-tabs"
+  ],
   "author": {
     "name": "Shinya Kumagai",
     "email": "roomful.rooms@gmail.com"
