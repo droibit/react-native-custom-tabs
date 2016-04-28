@@ -19,7 +19,7 @@ class Example extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Click on the link below!
         </Text>
         <TouchableHighlight
           underlayColor={'#CFD8DC'}
@@ -33,7 +33,11 @@ class Example extends Component {
   }
 
   openGoogle() {
-    CustomTabs.build().openURL('https://www.google.com')
+    CustomTabs.openURL('https://www.google.com').then((launched: boolean) => {
+      console.log(`Launched custom tabs: ${launched}`);
+    }).catch(err => {
+      console.error('An error occurred', err)
+    });
   }
 }
 

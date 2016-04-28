@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA7118851CC916080087DF95 /* DBCustomTabsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7118551CC90B700087DF95 /* DBCustomTabsManager.m */; };
+		DA7118851CC916080087DF95 /* DBChromeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7118551CC90B700087DF95 /* DBChromeManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,8 +25,8 @@
 /* Begin PBXFileReference section */
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ReactNativeCustomTabsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactNativeCustomTabsTests.m; sourceTree = "<group>"; };
-		DA7118541CC90B700087DF95 /* DBCustomTabsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBCustomTabsManager.h; path = ReactNativeCustomTabs/DBCustomTabsManager.h; sourceTree = "<group>"; };
-		DA7118551CC90B700087DF95 /* DBCustomTabsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBCustomTabsManager.m; path = ReactNativeCustomTabs/DBCustomTabsManager.m; sourceTree = "<group>"; };
+		DA7118541CC90B700087DF95 /* DBChromeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBChromeManager.h; path = ReactNativeCustomTabs/DBChromeManager.h; sourceTree = "<group>"; };
+		DA7118551CC90B700087DF95 /* DBChromeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBChromeManager.m; path = ReactNativeCustomTabs/DBChromeManager.m; sourceTree = "<group>"; };
 		DA7118681CC9158A0087DF95 /* libDBCustomTabs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDBCustomTabs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -61,8 +61,8 @@
 		13B07FAE1A68108700A75B9A /* ReactNativeCustomTabs */ = {
 			isa = PBXGroup;
 			children = (
-				DA7118541CC90B700087DF95 /* DBCustomTabsManager.h */,
-				DA7118551CC90B700087DF95 /* DBCustomTabsManager.m */,
+				DA7118541CC90B700087DF95 /* DBChromeManager.h */,
+				DA7118551CC90B700087DF95 /* DBChromeManager.m */,
 			);
 			name = ReactNativeCustomTabs;
 			sourceTree = "<group>";
@@ -143,7 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA7118851CC916080087DF95 /* DBCustomTabsManager.m in Sources */,
+				DA7118851CC916080087DF95 /* DBChromeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

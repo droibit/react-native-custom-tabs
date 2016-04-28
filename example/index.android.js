@@ -25,7 +25,7 @@ class Example extends Component {
           title={'React Native Custom Tabs'}
           titleColor={'#FFFFFF'}
           style={styles.toolbar} />
-        <View style={styles.testArea}>
+        <View style={styles.textArea}>
           <Text style={styles.welcome}>
             Click on the link below!
           </Text>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  testArea: {
+  textArea: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

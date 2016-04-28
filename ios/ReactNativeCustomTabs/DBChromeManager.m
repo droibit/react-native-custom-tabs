@@ -6,10 +6,10 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
-#import "DBCustomTabsManager.h"
+#import "DBChromeManager.h"
 #import "RCTUtils.h"
 
-@implementation DBCustomTabsManager
+@implementation DBChromeManager
 
 RCT_EXPORT_MODULE()
 

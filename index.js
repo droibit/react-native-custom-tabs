@@ -7,16 +7,9 @@
 'use strict';
 
 import {Platform} from 'react-native';
-import CustomTabsIOS from './src/CustomTabsIOS';
-import CustomTabsAndroid, {
-  ANIMATIONS_SLIDE,
-  ANIMATIONS_FADE
-} from './src/CustomTabsAndroid';
+import ChromeIOS from './src/ChromeIOS';
+import CustomTabsAndroid from './src/CustomTabsAndroid';
+import {ANIMATIONS_SLIDE, ANIMATIONS_FADE} from './src/TabOption';
 
-import type {TabOptionAndroid} from './src/CustomTabsAndroid';
-import type {TabOptionIOS} from './src/CustomTabsIOS';
-
-export type TabOption = TabOptionAndroid | TabOptionIOS;
-
-const CustomTabs = Platform.OS === 'android' ? CustomTabsAndroid : CustomTabsIOS;
+const CustomTabs = Platform.OS === 'android' ? CustomTabsAndroid : ChromeIOS;
 export {CustomTabs, ANIMATIONS_SLIDE, ANIMATIONS_FADE};

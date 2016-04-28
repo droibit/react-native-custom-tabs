@@ -8,6 +8,6 @@
 
 #import "RCTBridgeModule.h"
 
-@interface DBCustomTabsManager : NSObject<RCTBridgeModule>
+@interface DBChromeManager : NSObject<RCTBridgeModule>
 
 @end
