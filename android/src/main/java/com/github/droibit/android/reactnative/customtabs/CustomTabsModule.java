@@ -37,14 +37,22 @@ import static com.github.droibit.android.reactnative.customtabs.Constants.*;
  */
 public class CustomTabsModule extends ReactContextBaseJavaModule {
 
-    private static final String KEY_TOOLBAR_COLOR = "toolbarColor";
-    private static final String KEY_ENABLE_URL_BAR_HIDING = "enableUrlBarHiding";
-    private static final String KEY_SHOW_PAGE_TITLE = "showPageTitle";
-    private static final String KEY_DEFAULT_SHARE_MENU_ITEM = "enableDefaultShare";
-    private static final String KEY_ANIMATIONS = "animations";
+    @VisibleForTesting
+    /* package */ static final String KEY_TOOLBAR_COLOR = "toolbarColor";
+    @VisibleForTesting
+    /* package */ static final String KEY_ENABLE_URL_BAR_HIDING = "enableUrlBarHiding";
+    @VisibleForTesting
+    /* package */ static final String KEY_SHOW_PAGE_TITLE = "showPageTitle";
+    @VisibleForTesting
+    /* package */ static final String KEY_DEFAULT_SHARE_MENU_ITEM = "enableDefaultShare";
+    @VisibleForTesting
+    /* package */ static final String KEY_ANIMATIONS = "animations";
 
-    private static final int ANIMATIONS_SLIDE = 0;
-    private static final int ANIMATIONS_FADE = 1;
+    @VisibleForTesting
+    /* package */ static final int ANIMATIONS_SLIDE = 0;
+
+    @VisibleForTesting
+    /* package */ static final int ANIMATIONS_FADE = 1;
 
     private static final Map<String, Object> CONSTANTS;
 

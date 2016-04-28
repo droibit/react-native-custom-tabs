@@ -4,7 +4,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author kumagai
@@ -26,20 +27,21 @@ public class CustomTabsModuleTest {
         assertFalse(module.httpOrHttpsScheme(sdcard));
     }
 
+    // TODO
     public void setupWithoutAnimation() {
-        final CustomTabsModule module = new CustomTabsModule(null);
-
-        //final ReadableMap option = new JavaOnlyMap();
     }
 
+    // TODO
     public void setupAnimation() {
 
     }
 
+    // TODO
     public void emptyOption() {
 
     }
 
+    // TODO
     public void failedCastOption() {
 
     }

@@ -23,6 +23,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile "org.powermock:powermock:$powermock_version"
     testCompile "org.powermock:powermock-module-junit4:$powermock_version"
-//    testCompile "org.powermock:powermock-module-junit4-rule-agent:$powermock_version"
+    testCompile "org.powermock:powermock-module-junit4-rule-agent:$powermock_version"
     testCompile "org.powermock:powermock-api-mockito:$powermock_version"
 }
