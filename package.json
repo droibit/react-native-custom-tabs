@@ -1,6 +1,6 @@
 {
   "name": "react-native-custom-tabs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Chrome Custom Tabs for React Native.",
   "keywords": [
     "react-native",
@@ -21,20 +21,14 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "react": "^0.14.8",
-    "react-native": "^0.24.1"
+    "lint": "eslint ./src ./index.js"
   },
   "devDependencies": {
+    "react-native": "^0.24.1",
     "babel-eslint": "^6.0.3",
     "eslint": "^2.8.0",
     "eslint-plugin-flow-vars": "^0.3.0",
     "eslint-plugin-react": "^5.0.1",
-    "eslint-plugin-react-native": "^1.0.0",
-    "jest-cli": "^11.0.2"
+    "eslint-plugin-react-native": "^1.0.0"
   }
 }
