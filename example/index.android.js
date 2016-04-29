@@ -16,6 +16,8 @@ import React, {
   View
 } from 'react-native';
 
+import type {TabOption} from 'react-native-custom-tabs';
+
 class Example extends Component {
   render() {
     return (
@@ -31,27 +33,67 @@ class Example extends Component {
           </Text>
           <TouchableHighlight
             underlayColor={'#CFD8DC'}
-            onPress={() => this.openGoogle()} >
+            onPress={() => this.openCustomizedCustomTabs()} >
             <Text style={styles.link}>
               https://www.google.com
             </Text>
           </TouchableHighlight>
+          <Text>
+            (Customized Look & Feel)
+          </Text>
+          <TouchableHighlight
+            underlayColor={'#CFD8DC'}
+            onPress={() => this.openDefaultCustomTabs()}
+            style={{marginTop: 8}}>
+            <Text style={styles.link}>
+              https://www.google.com
+            </Text>
+          </TouchableHighlight>
+          <Text>
+            (Default Look & Feel)
+          </Text>
+          <TouchableHighlight
+            underlayColor={'#CFD8DC'}
+            onPress={() => this.errorOccur()}
+            style={{marginTop: 8}}>
+            <Text style={styles.link}>
+              https://www.google.com
+            </Text>
+          </TouchableHighlight>
+          <Text>
+            (Error occur)
+          </Text>
         </View>
       </View>
     );
   }
 
-  openGoogle() {
-    CustomTabs.openURL('https://www.google.com', {
+  openCustomizedCustomTabs() {
+    this.openGoogle({
       toolbarColor: '#607D8B',
       enableUrlBarHiding: true,
       showPageTitle: true,
       enableDefaultShare: true,
       animations: ANIMATIONS_SLIDE
-    }).then((launched: boolean) => {
+    });
+  }
+
+  openDefaultCustomTabs() {
+    this.openGoogle();
+  }
+
+  errorOccur() {
+    this.openGoogle({
+      //toolbarColor: '607D8B', // <--- Invalid toolbar color.
+      enableUrlBarHiding: '#607D8B',  // <-- Type Error.
+    })
+  }
+
+  openGoogle(option: ?TabOption) {
+    CustomTabs.openURL('https://www.google.com', option).then((launched: boolean) => {
       console.log(`Launched custom tabs: ${launched}`);
     }).catch(err => {
-      console.error('An error occurred', err)
+      console.error(err)
     });
   }
 }
