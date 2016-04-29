@@ -2,14 +2,8 @@ package com.github.droibit.android.reactnative.customtabs;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Color;
-import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
-import android.text.TextUtils;
 
 import com.droibit.android.customtabs.launcher.CustomTabsLauncher;
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
@@ -18,17 +12,13 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.UnexpectedNativeTypeException;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.common.annotations.VisibleForTesting;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
-
-import static android.content.pm.PackageManager.*;
-import static com.github.droibit.android.reactnative.customtabs.Constants.*;
 
 /**
  * CustomTabs module.
@@ -97,8 +87,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             return;
         }
 
-        if (httpOrHttpsScheme(url)) {
-            promise.reject(new JSApplicationIllegalArgumentException("Allow only http or https: " + url));
+        if (!httpOrHttpsScheme(url)) {
+            promise.reject(new JSApplicationIllegalArgumentException("Allow only http or https URL: " + url));
             return;
         }
 
@@ -115,7 +105,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             } else {
                 promise.resolve(false);
             }
-        } catch (JSApplicationIllegalArgumentException e) {
+        } catch (JSApplicationIllegalArgumentException | UnexpectedNativeTypeException e) {
             // If build option is invalid.
             promise.reject(e);
         } catch (Exception e) {
