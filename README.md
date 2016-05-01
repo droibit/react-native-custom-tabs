@@ -1,10 +1,10 @@
 # React Native Custom Tabs
 Chrome Custom Tabs for React Native. Custom Tabs is supported only Chrome for Android. For this reason, the interface is the same, but the behavior is following:
 
-* iOS
+* iOS  
     If Chrome is installed, open the URL in it. If it is not installed, open in Safari.
 
-* Android
+* Android  
     If Chrome is installed, open the URL in Chrome that you have customized some of the look & feel. If it is not installed, open in other browser.
 
 Customization and detailed behavior refer to the Usage.
@@ -43,7 +43,7 @@ TODO
 Open the URL as `Linking` of React Native.
 
 ```javascript
-CustomTabs.openURL('https://www.google.com', {}).then((launched: {boolean}) => {
+CustomTabs.openURL('https://www.google.com').then((launched: {boolean}) => {
   console.log(`Launched custom tabs: ${launched}`);
 }).catch(err => {
   console.error(err)
@@ -79,10 +79,9 @@ The option to support:
 |enableDefaultShare|boolean|undefined|Whether to add a default shared items of the menu.|
 |animations|number|undefined|Sets the exit and start animations. ANIMATIONS_FADE or ANIMATIONS_SLIDE.|
 
-All The default value is `undefined`, there is no problem even if you specify an empty object(`{}`).
-And, `undefined` property is the default behavior of the Custom Tabs.
+`undefined` property is the default behavior of the Custom Tabs.
 
-Customize and default look & feel.
+Customize and default look & feel.  
 ![screenshot](http://i.imgur.com/0qE2E7a.gif)
 
 ## License
