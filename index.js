@@ -1,7 +1,5 @@
 /**
- * TODO: add license
- *
- * @providesModule CustomTabsAndroid
+ * @public
  * @flow
  */
 'use strict';

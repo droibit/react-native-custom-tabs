@@ -1,6 +1,4 @@
 /**
- * TODO: add license
- * 
  * @flow
  */
 'use strict';
