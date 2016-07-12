@@ -1,5 +1,5 @@
 # React Native Custom Tabs
-[![npm version](https://badge.fury.io/js/react-native-custom-tabs.svg)](https://badge.fury.io/js/react-native-custom-tabs) [![Software License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](https://github.com/droibit/react-native-custom-tabs/blob/develop/LICENSE) 
+[![npm version](https://badge.fury.io/js/react-native-custom-tabs.svg)](https://badge.fury.io/js/react-native-custom-tabs) [![Software License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](https://github.com/droibit/react-native-custom-tabs/blob/develop/LICENSE)
 
 Chrome Custom Tabs for React Native. Custom Tabs is supported only Chrome for Android. For this reason, the interface is the same, but the behavior is following:
 
@@ -67,7 +67,10 @@ CustomTabs.openURL(url, {
   enableUrlBarHiding: true,
   showPageTitle: true,
   enableDefaultShare: true,
-  animations: ANIMATIONS_SLIDE // or ANIMATIONS_FADE
+  animations: ANIMATIONS_SLIDE, // or ANIMATIONS_FADE
+  headers: {
+    'my-custom-header': 'my custom header value'
+  }
 });
 ```
 
@@ -80,6 +83,7 @@ The option to support:
 |showPageTitle|boolean|undefined|Sets whether the title should be shown in the custom tab.|
 |enableDefaultShare|boolean|undefined|Whether to add a default shared items of the menu.|
 |animations|number|undefined|Sets the exit and start animations. ANIMATIONS_FADE or ANIMATIONS_SLIDE.|
+|headers|Object|undefined|Sets any custom headers that should be used.|
 
 `undefined` property is the default behavior of the Custom Tabs.
 
