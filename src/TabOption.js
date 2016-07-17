@@ -50,6 +50,11 @@ export type TabOption = {
    * @see ANIMATIONS_SLIDE
    */
     animations?: number;
+
+  /**
+   * Sets any custom headers that should be used.
+   */
+    headers?: Object;
 };
 
 

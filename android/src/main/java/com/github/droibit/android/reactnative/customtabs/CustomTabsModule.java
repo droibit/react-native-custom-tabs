@@ -3,6 +3,8 @@ package com.github.droibit.android.reactnative.customtabs;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.provider.Browser;
 import android.support.customtabs.CustomTabsIntent;
 
 import com.droibit.android.customtabs.launcher.CustomTabsLauncher;
@@ -12,6 +14,8 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.UnexpectedNativeTypeException;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.common.annotations.VisibleForTesting;
@@ -37,6 +41,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     /* package */ static final String KEY_DEFAULT_SHARE_MENU_ITEM = "enableDefaultShare";
     @VisibleForTesting
     /* package */ static final String KEY_ANIMATIONS = "animations";
+    @VisibleForTesting
+    /* package */ static final String KEY_HEADERS = "headers";
 
     @VisibleForTesting
     /* package */ static final int ANIMATIONS_SLIDE = 0;
@@ -53,6 +59,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_SHOW_PAGE_TITLE, KEY_SHOW_PAGE_TITLE);
         CONSTANTS.put(KEY_DEFAULT_SHARE_MENU_ITEM, KEY_DEFAULT_SHARE_MENU_ITEM);
         CONSTANTS.put(KEY_ANIMATIONS, KEY_ANIMATIONS);
+        CONSTANTS.put(KEY_HEADERS, KEY_HEADERS);
     }
 
     private static final String MODULE_NAME = "CustomTabsManager";
@@ -152,7 +159,34 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
                     break;
             }
         }
-        return builder.build();
+        CustomTabsIntent customTabsIntent = builder.build();
+
+        // Add custom headers if present
+        if (option.hasKey(KEY_HEADERS)) {
+            ReadableMap readableMap = option.getMap(KEY_HEADERS);
+
+            if (readableMap != null) {
+                ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
+                if (iterator.hasNextKey()) {
+                    Bundle headers = new Bundle();
+                    while (iterator.hasNextKey()) {
+                        String key = iterator.nextKey();
+                        ReadableType readableType = readableMap.getType(key);
+                        switch (readableType) {
+                            case String:
+                                headers.putString(key, readableMap.getString(key));
+                                break;
+                            default:
+                                // ignore
+                                break;
+                        }
+                    }
+                    customTabsIntent.intent.putExtra(Browser.EXTRA_HEADERS, headers);
+                }
+            }
+        }
+
+        return customTabsIntent;
     }
 
     @VisibleForTesting
