@@ -89,7 +89,7 @@ The option to support:
 |headers|Object|undefined|Sets any custom headers that should be used.|
 |backButton|Boolean|false|(android only), set '<' back button insted of cross icon.|
 |backButtonColor|enum|dark|(android only), 'light' or 'dark', provide white or black color '<' icon|
-|backButtonIcon|string|undefined| (android only), can provide own icon, just download the custom icons for from https://material.io/icons/ and add them REACTNATIVEPROJECT/android/app/src/main/res/mipmap-*|
+|backButtonIcon|string|undefined| (android only), can provide own icon, just download the custom icons from https://material.io/icons/ and add them REACTNATIVEPROJECT/android/app/src/main/res/mipmap-*|
 
 `undefined` property is the default behavior of the Custom Tabs.
 
