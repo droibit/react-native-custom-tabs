@@ -76,8 +76,8 @@ class Example extends Component {
       enableDefaultShare: true,
       animations: ANIMATIONS_SLIDE,
       backButton:true,
-      backButtonColor:'dark',
-      backButtonColorIcon:'ic_arrow_back_white_24dp'
+      backButtonColor:'light',
+      backButtonIcon:'ic_arrow_back_white_24dp'
     });
   }
 

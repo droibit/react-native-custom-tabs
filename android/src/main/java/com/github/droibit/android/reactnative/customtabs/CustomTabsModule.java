@@ -54,7 +54,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     @VisibleForTesting
     /* package */ static final String KEY_BACKBUTTONCOLOR = "backButtonColor";
     @VisibleForTesting
-    /* package */ static final String KEY_BACKBUTTONCOLORICON = "backButtonColorIcon";
+    /* package */ static final String KEY_BACKBUTTONICON = "backButtonIcon";
 
     @VisibleForTesting
     /* package */ static final int ANIMATIONS_SLIDE = 0;
@@ -74,7 +74,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_HEADERS, KEY_HEADERS);
         CONSTANTS.put(KEY_BACKBUTTON, KEY_BACKBUTTON);
         CONSTANTS.put(KEY_BACKBUTTONCOLOR, KEY_BACKBUTTONCOLOR);
-        CONSTANTS.put(KEY_BACKBUTTONCOLORICON, KEY_BACKBUTTONCOLORICON);
+        CONSTANTS.put(KEY_BACKBUTTONICON, KEY_BACKBUTTONICON);
     }
 
     private static final String MODULE_NAME = "CustomTabsManager";
@@ -163,11 +163,11 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             builder.setCloseButtonIcon(iconBitMap);
         }
 
-        //KEY_BACKBUTTONCOLORICON
-        if (option.hasKey(KEY_BACKBUTTONCOLORICON)) {
+        //KEY_BACKBUTTONICON
+        if (option.hasKey(KEY_BACKBUTTONICON)) {
             Resources res = context.getResources();
             String packageName = context.getPackageName();
-            String icon = !option.getString(KEY_BACKBUTTONCOLORICON).equals("") ? option.getString(KEY_BACKBUTTONCOLORICON) : "ic_chevron_left_black_24dp";
+            String icon = !option.getString(KEY_BACKBUTTONICON).equals("") ? option.getString(KEY_BACKBUTTONICON) : "ic_chevron_left_black_24dp";
             int iconId = res.getIdentifier(icon, "mipmap", packageName);
             Bitmap iconBitMap = BitmapFactory.decodeResource(res, iconId);
             builder.setCloseButtonIcon(iconBitMap);
