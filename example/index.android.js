@@ -68,13 +68,16 @@ class Example extends Component {
     );
   }
 
-  openCustomizedCustomTabs() {
+    openCustomizedCustomTabs() {
     this.openGoogle({
       toolbarColor: '#607D8B',
       enableUrlBarHiding: true,
       showPageTitle: true,
       enableDefaultShare: true,
-      animations: ANIMATIONS_SLIDE
+      animations: ANIMATIONS_SLIDE,
+      backButton:true,
+      backButtonColor:'dark',
+      backButtonColorIcon:'ic_arrow_back_white_24dp'
     });
   }
 
