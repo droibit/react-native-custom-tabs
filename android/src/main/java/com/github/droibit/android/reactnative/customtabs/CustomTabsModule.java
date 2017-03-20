@@ -20,9 +20,15 @@ import com.facebook.react.bridge.UnexpectedNativeTypeException;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.common.annotations.VisibleForTesting;
 
+
 import java.util.Map;
 
 import javax.annotation.Nullable;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.content.res.Resources;
+import android.R.drawable;
 
 /**
  * CustomTabs module.
@@ -43,6 +49,12 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     /* package */ static final String KEY_ANIMATIONS = "animations";
     @VisibleForTesting
     /* package */ static final String KEY_HEADERS = "headers";
+    @VisibleForTesting
+    /* package */ static final String KEY_BACKBUTTON = "backButton";
+    @VisibleForTesting
+    /* package */ static final String KEY_BACKBUTTONCOLOR = "backButtonColor";
+    @VisibleForTesting
+    /* package */ static final String KEY_BACKBUTTONICON = "backButtonIcon";
 
     @VisibleForTesting
     /* package */ static final int ANIMATIONS_SLIDE = 0;
@@ -60,6 +72,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_DEFAULT_SHARE_MENU_ITEM, KEY_DEFAULT_SHARE_MENU_ITEM);
         CONSTANTS.put(KEY_ANIMATIONS, KEY_ANIMATIONS);
         CONSTANTS.put(KEY_HEADERS, KEY_HEADERS);
+        CONSTANTS.put(KEY_BACKBUTTON, KEY_BACKBUTTON);
+        CONSTANTS.put(KEY_BACKBUTTONCOLOR, KEY_BACKBUTTONCOLOR);
+        CONSTANTS.put(KEY_BACKBUTTONICON, KEY_BACKBUTTONICON);
     }
 
     private static final String MODULE_NAME = "CustomTabsManager";
@@ -134,6 +149,30 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
                         "Invalid toolbar color '" + colorString + "': " + e.getMessage());
             }
         }
+        //KEY_BACKBUTTON
+        if (option.hasKey(KEY_BACKBUTTON) && option.getBoolean(KEY_BACKBUTTON)) {
+            Resources res = context.getResources();
+            String packageName = context.getPackageName();
+            String icon = "ic_chevron_left_black_24dp";
+            if (option.hasKey(KEY_BACKBUTTONCOLOR)) {
+                String color = option.getString(KEY_BACKBUTTONCOLOR);
+                icon = color.equalsIgnoreCase("light") ? "ic_chevron_left_white_24dp" : "ic_chevron_left_black_24dp";
+            }
+            int iconId = res.getIdentifier(icon, "mipmap", packageName);
+            Bitmap iconBitMap = BitmapFactory.decodeResource(res, iconId);
+            builder.setCloseButtonIcon(iconBitMap);
+        }
+
+        //KEY_BACKBUTTONICON
+        if (option.hasKey(KEY_BACKBUTTONICON)) {
+            Resources res = context.getResources();
+            String packageName = context.getPackageName();
+            String icon = !option.getString(KEY_BACKBUTTONICON).equals("") ? option.getString(KEY_BACKBUTTONICON) : "ic_chevron_left_black_24dp";
+            int iconId = res.getIdentifier(icon, "mipmap", packageName);
+            Bitmap iconBitMap = BitmapFactory.decodeResource(res, iconId);
+            builder.setCloseButtonIcon(iconBitMap);
+        }
+
         if (option.hasKey(KEY_ENABLE_URL_BAR_HIDING) &&
                 option.getBoolean(KEY_ENABLE_URL_BAR_HIDING)) {
             builder.enableUrlBarHiding();

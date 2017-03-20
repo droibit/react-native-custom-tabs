@@ -70,7 +70,10 @@ CustomTabs.openURL(url, {
   animations: ANIMATIONS_SLIDE, // or ANIMATIONS_FADE
   headers: {
     'my-custom-header': 'my custom header value'
-  }
+  },
+   backButton:true,         // or false
+   backButtonColor:'light',  // or dark
+   backButtonIcon:'ic_arrow_back_white_24dp' // to provide own back-button
 });
 ```
 
@@ -84,6 +87,9 @@ The option to support:
 |enableDefaultShare|boolean|undefined|Whether to add a default shared items of the menu.|
 |animations|number|undefined|Sets the exit and start animations. ANIMATIONS_FADE or ANIMATIONS_SLIDE.|
 |headers|Object|undefined|Sets any custom headers that should be used.|
+|backButton|Boolean|false|(android only), set '<' back button insted of cross icon.|
+|backButtonColor|enum|dark|(android only), 'light' or 'dark', provide white or black color '<' icon|
+|backButtonIcon|string|undefined| (android only), can provide own icon, just download the custom icons from https://material.io/icons/ and add them in REACTNATIVEPROJECT/android/app/src/main/res/mipmap-*|
 
 `undefined` property is the default behavior of the Custom Tabs.
 
