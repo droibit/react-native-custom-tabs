@@ -1,13 +1,12 @@
-/// <reference path="../../typings/main.d.ts" />
-
 /**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
  * @flow
  */
 
-import {CustomTabs, ANIMATIONS_SLIDE} from 'react-native-custom-tabs';
-import React, {
+import React, { Component } from 'react';
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   StatusBar,
   ToolbarAndroid,
@@ -15,10 +14,12 @@ import React, {
   TouchableHighlight,
   View
 } from 'react-native';
+import {
+  CustomTabs,
+  ANIMATIONS_SLIDE
+} from 'react-native-custom-tabs';
 
-import type {TabOption} from 'react-native-custom-tabs';
-
-class Example extends Component {
+export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -89,7 +90,7 @@ class Example extends Component {
     })
   }
 
-  openGoogle(option: ?TabOption) {
+  openGoogle(option) {
     CustomTabs.openURL('https://www.google.com', option).then((launched: boolean) => {
       console.log(`Launched custom tabs: ${launched}`);
     }).catch(err => {
