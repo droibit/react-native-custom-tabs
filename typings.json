@@ -1,8 +1,6 @@
 {
-  "version": false,
-  "dependencies": {},
-  "ambientDependencies": {
-    "react": "registry:dt/react#0.14.0+20160412154040",
-    "react-native": "registry:dt/react-native#0.19.0+20160404033213"
+  "dependencies": {
+    "react": "registry:npm/react#15.0.1+20170104200836",
+    "react-native": "registry:dt/react-native#0.42.0+20170324170601"
   }
 }
