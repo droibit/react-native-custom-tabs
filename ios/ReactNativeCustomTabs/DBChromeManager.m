@@ -6,8 +6,8 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
+#import <React/RCTUtils.h>
 #import "DBChromeManager.h"
-#import "RCTUtils.h"
 
 @implementation DBChromeManager
 

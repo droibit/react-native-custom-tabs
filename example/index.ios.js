@@ -6,17 +6,17 @@
  * @flow
  */
 
-import {CustomTabs} from 'react-native-custom-tabs';
-import React, {
+import React, {Component} from 'react';
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
+import {CustomTabs} from 'react-native-custom-tabs';
 
-class Example extends Component {
+export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
