@@ -36,9 +36,10 @@ allprojects {
 }
 ```
 
-### Manually
+Please provide `CustomTabsPackage` in your Application class.
 
-TODO
+* [example/MainApplication.java](https://github.com/droibit/react-native-custom-tabs/blob/develop/example/android/app/src/main/java/com/github/droibit/android/reactnative/customtabs/example/MainApplication.java#L28)
+* [Register the Module](https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module)
 
 ## Usage
 
@@ -52,7 +53,7 @@ CustomTabs.openURL('https://www.google.com').then((launched: {boolean}) => {
 });
 ```
 
-#### Customization(Android)
+#### Customized for Android
 
 You can customize the look & feel in Android. The following option is ignored in iOS.
 
