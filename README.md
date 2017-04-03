@@ -25,7 +25,7 @@ rnpm link
 
 #### Android
 
-In Android, Add it in your root build.gradle at the end of repositories:
+In Android, Add it in your **root** `build.gradle` at the end of repositories:
 
 ```groovy
 allprojects {
@@ -36,10 +36,32 @@ allprojects {
 }
 ```
 
-Please provide `CustomTabsPackage` in your Application class.
+And, provide `CustomTabsPackage` in your Application class.
 
-* [example/MainApplication.java](https://github.com/droibit/react-native-custom-tabs/blob/develop/example/android/app/src/main/java/com/github/droibit/android/reactnative/customtabs/example/MainApplication.java#L28)
-* [Register the Module](https://facebook.github.io/react-native/docs/native-modules-android.html#register-the-module)
+```java
+@Override
+protected List<ReactPackage> getPackages() {
+    return Arrays.asList(
+            ...,
+            new CustomTabsPackage()
+    );
+}
+```
+
+If you use version `0.1.5` or higher, change the **app** `build.gradle`.
+
+```groovy
+android {
+    ...
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+}
+
+dependencies {
+    ...
+    compile "com.android.support:appcompat-v7:25.0.1"
+}
+```
 
 ## Usage
 
