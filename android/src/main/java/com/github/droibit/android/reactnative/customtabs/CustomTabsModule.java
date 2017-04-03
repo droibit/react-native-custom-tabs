@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Browser;
 import android.support.customtabs.CustomTabsIntent;
+import android.text.TextUtils;
 
 import com.droibit.android.customtabs.launcher.CustomTabsLauncher;
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
@@ -26,8 +27,6 @@ import javax.annotation.Nullable;
 
 /**
  * CustomTabs module.
- *
- * @author kumagai
  */
 public class CustomTabsModule extends ReactContextBaseJavaModule {
 
@@ -89,7 +88,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void openURL(String url, ReadableMap option, Promise promise) {
-        if (url == null || url.equals("")) {
+        if (TextUtils.isEmpty(url)) {
             promise.reject(new JSApplicationIllegalArgumentException("Invalid URL: " + url));
             return;
         }
