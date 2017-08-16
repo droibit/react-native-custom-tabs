@@ -3,6 +3,7 @@ package com.github.droibit.android.reactnative.customtabs;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Browser;
 import android.support.customtabs.CustomTabsIntent;
@@ -159,6 +160,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             }
         }
         CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         // Add custom headers if present
         if (option.hasKey(KEY_HEADERS)) {
