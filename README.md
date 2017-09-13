@@ -90,6 +90,15 @@ CustomTabs.openURL(url, {
   enableUrlBarHiding: true,
   showPageTitle: true,
   enableDefaultShare: true,
+  // For value, specify only full qualifier or only resource name.
+  // In the case of the resource name, the module complements the application package in java side.
+  animations: {
+    startEnter: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_in_bottom',
+    startExit: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_out_bottom',
+    endEnter: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_in_bottom',
+    endExit: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_out_bottom',
+  },
+  // or
   animations: ANIMATIONS_SLIDE, // or ANIMATIONS_FADE
   headers: {
     'my-custom-header': 'my custom header value'
@@ -105,7 +114,7 @@ The option to support:
 |enableUrlBarHiding|boolean|undefined|Enables the url bar to hide as the user scrolls down on the page.|
 |showPageTitle|boolean|undefined|Sets whether the title should be shown in the custom tab.|
 |enableDefaultShare|boolean|undefined|Whether to add a default shared items of the menu.|
-|animations|number|undefined|Sets the exit and start animations. ANIMATIONS_FADE or ANIMATIONS_SLIDE.|
+|animations|Object|undefined|Sets the exit and start animations. ANIMATIONS_FADE, ANIMATIONS_SLIDE or custom object with string properties `startEnter`, `startExit`, `endEnter` and `endExit` each defining an Android animation resource ID to use for the animations, such as `com.github.droibit.android.reactnative.customtabs:anim/slide_in_right`.|
 |headers|Object|undefined|Sets any custom headers that should be used.|
 
 `undefined` property is the default behavior of the Custom Tabs.

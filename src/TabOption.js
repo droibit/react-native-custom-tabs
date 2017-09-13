@@ -7,13 +7,30 @@
  * Start and exit animations of Custom Tabs.
  * Slide in from left at start, Slide out to right.at exit.
  */
-export const ANIMATIONS_SLIDE:number = 0;
+export const ANIMATIONS_SLIDE: Animations = {
+  startEnter: 'slide_in_right',
+  startExit: 'slide_out_left',
+  endEnter: 'android:anim/slide_in_left',
+  endExit: 'android:anim/slide_out_right',
+};
 
 /**
  * Start and exit animations of Custom Tabs.
  * Fade in at start, Fade out  at exit.
  */
-export const ANIMATIONS_FADE:number = 1;
+export const ANIMATIONS_FADE: Animations = {
+  startEnter: 'android:anim/fade_in',
+  startExit: 'android:anim/fade_out',
+  endEnter: 'android:anim/fade_out',
+  endExit: 'android:anim/fade_in',
+};
+
+export type Animations = {
+  startEnter: string,
+  startExit: string,
+  endEnter: string,
+  endExit: string,
+}
 
 /**
  * Options to customize Custom Tabs of look & feel.
@@ -46,10 +63,13 @@ export type TabOption = {
   /**
    * Sets the exit and start animations.
    *
+   * Each property needs to be an Andrion animation resource ID,
+   * e.g. 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_out_bottom'
+   *
    * @see ANIMATIONS_FADE
    * @see ANIMATIONS_SLIDE
    */
-    animations?: number;
+    animations?: Animations;
 
   /**
    * Sets any custom headers that should be used.

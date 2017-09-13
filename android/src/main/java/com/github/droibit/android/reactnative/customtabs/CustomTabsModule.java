@@ -22,6 +22,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.common.annotations.VisibleForTesting;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
@@ -43,12 +44,6 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     @VisibleForTesting
     /* package */ static final String KEY_HEADERS = "headers";
 
-    @VisibleForTesting
-    /* package */ static final int ANIMATIONS_SLIDE = 0;
-
-    @VisibleForTesting
-    /* package */ static final int ANIMATIONS_FADE = 1;
-
     private static final Map<String, Object> CONSTANTS;
 
     static {
@@ -62,6 +57,10 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     }
 
     private static final String MODULE_NAME = "CustomTabsManager";
+
+    // Note: The full resource qualifier is "package:type/entry".
+    // https://developer.android.com/reference/android/content/res/Resources.html#getIdentifier(java.lang.String, java.lang.String, java.lang.String)
+    private static final Pattern animationIdentifierPattern = Pattern.compile("^.+:.+/");
 
     public CustomTabsModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -148,15 +147,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         // TODO: If it does not launch Chrome, animation is unnecessary?
 
         if (option.hasKey(KEY_ANIMATIONS)) {
-            final int animation = option.getInt(KEY_ANIMATIONS);
-            switch (animation) {
-                case ANIMATIONS_SLIDE:
-                    applySlideAnimation(context, builder);
-                    break;
-                case ANIMATIONS_FADE:
-                    applyFadeAnimation(context, builder);
-                    break;
-            }
+            final ReadableMap animations = option.getMap(KEY_ANIMATIONS);
+            applyAnimation(context, builder, animations);
         }
         CustomTabsIntent customTabsIntent = builder.build();
 
@@ -194,14 +186,29 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     }
 
     @VisibleForTesting
-    /* package */ void applySlideAnimation(Context context, CustomTabsIntent.Builder builder) {
-        builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
-                .setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    /* package */ void applyAnimation(Context context, CustomTabsIntent.Builder builder, ReadableMap animations) {
+        final int startEnterAnimationId = animations.hasKey("startEnter")
+            ? resolveAnimationIdentifierIfNeed(context, animations.getString("startEnter"))
+            : 0;
+        final int startExitAnimationId = animations.hasKey("startExit")
+            ? resolveAnimationIdentifierIfNeed(context, animations.getString("startExit"))
+            : 0;
+        final int endEnterAnimationId = animations.hasKey("endEnter")
+            ? resolveAnimationIdentifierIfNeed(context, animations.getString("endEnter"))
+            : 0;
+        final int endExitAnimationId = animations.hasKey("endExit")
+            ? resolveAnimationIdentifierIfNeed(context, animations.getString("endExit"))
+            : 0;
+        builder.setStartAnimations(context, startEnterAnimationId, startExitAnimationId)
+                .setExitAnimations(context, endEnterAnimationId, endExitAnimationId);
     }
 
-    @VisibleForTesting
-    /* package */ void applyFadeAnimation(Context context, CustomTabsIntent.Builder builder) {
-        builder.setStartAnimations(context, android.R.anim.fade_in, android.R.anim.fade_out)
-                .setExitAnimations(context, android.R.anim.fade_out, android.R.anim.fade_in);
+    // Complement the application name of the resource qualifier as necessary.
+    private int resolveAnimationIdentifierIfNeed(Context context, String identifier) {
+        if (animationIdentifierPattern.matcher(identifier).find()) {
+            return context.getResources().getIdentifier(identifier, null, null);
+        } else {
+            return context.getResources().getIdentifier(identifier, "anim", context.getPackageName());
+        }
     }
 }
