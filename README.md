@@ -3,11 +3,11 @@
 
 Chrome Custom Tabs for React Native. Custom Tabs is supported only Chrome for Android. For this reason, the interface is the same, but the behavior is following:
 
-* iOS  
-    If Chrome is installed, open the URL in it. If it is not installed, open in Safari.
-
 * Android  
     If Chrome is installed, open the URL in Chrome that you have customized some of the look & feel. If it is not installed, open in other browser.
+
+* iOS  
+    If Chrome is installed, open the URL in it. If it is not installed, open in Safari.
 
 Customization and detailed behavior refer to the Usage.
 
@@ -92,13 +92,13 @@ CustomTabs.openURL(url, {
   enableUrlBarHiding: true,
   showPageTitle: true,
   enableDefaultShare: true,
-  // For value, specify only full qualifier or only resource name.
-  // In the case of the resource name, the module complements the application package in java side.
+  // For value, specify only full qualifier(package:anim/name) or only resource name.
+  // In the case of the resource name, the module complements application package.
   animations: {
-    startEnter: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_in_bottom',
-    startExit: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_out_bottom',
-    endEnter: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_in_bottom',
-    endExit: 'com.github.droibit.android.reactnative.customtabs.example:anim/slide_out_bottom',
+    startEnter: 'slide_in_bottom',
+    startExit: 'slide_out_bottom',
+    endEnter: 'slide_in_bottom',
+    endExit: 'slide_out_bottom',
   },
   // or
   animations: ANIMATIONS_SLIDE, // or ANIMATIONS_FADE
@@ -117,7 +117,7 @@ The option to support:
 |enableUrlBarHiding|boolean|undefined|Enables the url bar to hide as the user scrolls down on the page.|
 |showPageTitle|boolean|undefined|Sets whether the title should be shown in the custom tab.|
 |enableDefaultShare|boolean|undefined|Whether to add a default shared items of the menu.|
-|animations|Object|undefined|Sets the exit and start animations. ANIMATIONS_FADE, ANIMATIONS_SLIDE or custom object with string properties `startEnter`, `startExit`, `endEnter` and `endExit` each defining an Android animation resource ID to use for the animations, such as `com.github.droibit.android.reactnative.customtabs:anim/slide_in_right`.|
+|animations|Object|undefined|Sets the exit and start animations. ANIMATIONS_FADE, ANIMATIONS_SLIDE or custom object with string properties `startEnter`, `startExit`, `endEnter` and `endExit` each defining an Android animation resource ID to use for the animations, such as `slide_in_right`.|
 |headers|Object|undefined|Sets any custom headers that should be used.|
 |forceCloseOnRedirection|boolean|undefined|Workaround that Custom Tabs doesn't close on redirecting back to app scheme.([#11](https://github.com/droibit/react-native-custom-tabs/pull/11))|
 
