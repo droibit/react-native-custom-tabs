@@ -39,6 +39,8 @@ allprojects {
 And, provide `CustomTabsPackage` in your Application class.
 
 ```java
+import com.github.droibit.android.reactnative.customtabs.CustomTabsPackage;
+
 @Override
 protected List<ReactPackage> getPackages() {
     return Arrays.asList(
