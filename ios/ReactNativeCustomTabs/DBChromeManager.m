@@ -6,7 +6,11 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
+#if __has_include(<React/RCTUtils.h>)
 #import <React/RCTUtils.h>
+#else
+#import "RCTUtils.h"
+#endif
 #import "DBChromeManager.h"
 
 @implementation DBChromeManager
