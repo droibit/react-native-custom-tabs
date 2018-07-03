@@ -16,7 +16,8 @@ import {
 } from 'react-native';
 import {
   CustomTabs,
-  ANIMATIONS_SLIDE
+  ANIMATIONS_SLIDE,
+  ANIMATIONS_FADE
 } from 'react-native-custom-tabs';
 
 export default class Example extends Component {
@@ -75,7 +76,13 @@ export default class Example extends Component {
       enableUrlBarHiding: true,
       showPageTitle: true,
       enableDefaultShare: true,
-      animations: ANIMATIONS_SLIDE,
+      animations: ANIMATIONS_FADE,
+      // animations: {
+      //   startEnter: 'slide_up',
+      //   startExit: 'android:anim/fade_out',
+      //   endEnter: 'android:anim/fade_in',
+      //   endExit: 'slide_down',
+      // },
       forceCloseOnRedirection: true,
     });
   }

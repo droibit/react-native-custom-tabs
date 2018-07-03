@@ -21,8 +21,8 @@ export const ANIMATIONS_SLIDE: Animations = {
 export const ANIMATIONS_FADE: Animations = {
   startEnter: 'android:anim/fade_in',
   startExit: 'android:anim/fade_out',
-  endEnter: 'android:anim/fade_out',
-  endExit: 'android:anim/fade_in',
+  endEnter: 'android:anim/fade_in',
+  endExit: 'android:anim/fade_out',
 };
 
 export type Animations = {

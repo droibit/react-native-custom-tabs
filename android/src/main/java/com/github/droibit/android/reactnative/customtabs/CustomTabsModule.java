@@ -32,20 +32,17 @@ import javax.annotation.Nullable;
  */
 public class CustomTabsModule extends ReactContextBaseJavaModule {
 
-    @VisibleForTesting
-    /* package */ static final String KEY_TOOLBAR_COLOR = "toolbarColor";
-    @VisibleForTesting
-    /* package */ static final String KEY_ENABLE_URL_BAR_HIDING = "enableUrlBarHiding";
-    @VisibleForTesting
-    /* package */ static final String KEY_SHOW_PAGE_TITLE = "showPageTitle";
-    @VisibleForTesting
-    /* package */ static final String KEY_DEFAULT_SHARE_MENU_ITEM = "enableDefaultShare";
-    @VisibleForTesting
-    /* package */ static final String KEY_ANIMATIONS = "animations";
-    @VisibleForTesting
-    /* package */ static final String KEY_HEADERS = "headers";
-    @VisibleForTesting
-    /* package */ static final String FORCE_CLOSE_ON_REDIRECTION = "forceCloseOnRedirection";
+    private static final String KEY_TOOLBAR_COLOR = "toolbarColor";
+    private static final String KEY_ENABLE_URL_BAR_HIDING = "enableUrlBarHiding";
+    private static final String KEY_SHOW_PAGE_TITLE = "showPageTitle";
+    private static final String KEY_DEFAULT_SHARE_MENU_ITEM = "enableDefaultShare";
+    private static final String KEY_ANIMATIONS = "animations";
+    private static final String KEY_HEADERS = "headers";
+    private static final String KEY_FORCE_CLOSE_ON_REDIRECTION = "forceCloseOnRedirection";
+    private static final String KEY_ANIMATION_START_ENTER = "startEnter";
+    private static final String KEY_ANIMATION_START_EXIT = "startExit";
+    private static final String KEY_ANIMATION_END_ENTER = "endEnter";
+    private static final String KEY_ANIMATION_END_EXIT = "endExit";
 
     private static final Map<String, Object> CONSTANTS;
 
@@ -57,7 +54,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_DEFAULT_SHARE_MENU_ITEM, KEY_DEFAULT_SHARE_MENU_ITEM);
         CONSTANTS.put(KEY_ANIMATIONS, KEY_ANIMATIONS);
         CONSTANTS.put(KEY_HEADERS, KEY_HEADERS);
-        CONSTANTS.put(FORCE_CLOSE_ON_REDIRECTION, FORCE_CLOSE_ON_REDIRECTION);
+        CONSTANTS.put(KEY_FORCE_CLOSE_ON_REDIRECTION, KEY_FORCE_CLOSE_ON_REDIRECTION);
     }
 
     private static final String MODULE_NAME = "CustomTabsManager";
@@ -178,8 +175,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             }
         }
 
-        if (option.hasKey(FORCE_CLOSE_ON_REDIRECTION) &&
-                option.getBoolean(FORCE_CLOSE_ON_REDIRECTION)) {
+        if (option.hasKey(KEY_FORCE_CLOSE_ON_REDIRECTION) &&
+                option.getBoolean(KEY_FORCE_CLOSE_ON_REDIRECTION)) {
                   customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                   customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
@@ -194,24 +191,30 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
 
     @VisibleForTesting
     /* package */ void applyAnimation(Context context, CustomTabsIntent.Builder builder, ReadableMap animations) {
-        final int startEnterAnimationId = animations.hasKey("startEnter")
-            ? resolveAnimationIdentifierIfNeed(context, animations.getString("startEnter"))
-            : 0;
-        final int startExitAnimationId = animations.hasKey("startExit")
-            ? resolveAnimationIdentifierIfNeed(context, animations.getString("startExit"))
-            : 0;
-        final int endEnterAnimationId = animations.hasKey("endEnter")
-            ? resolveAnimationIdentifierIfNeed(context, animations.getString("endEnter"))
-            : 0;
-        final int endExitAnimationId = animations.hasKey("endExit")
-            ? resolveAnimationIdentifierIfNeed(context, animations.getString("endExit"))
-            : 0;
-        builder.setStartAnimations(context, startEnterAnimationId, startExitAnimationId)
-                .setExitAnimations(context, endEnterAnimationId, endExitAnimationId);
+        final int startEnterAnimationId = animations.hasKey(KEY_ANIMATION_START_ENTER)
+            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_START_ENTER))
+            : -1;
+        final int startExitAnimationId = animations.hasKey(KEY_ANIMATION_START_EXIT)
+            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_START_EXIT))
+            : -1;
+        final int endEnterAnimationId = animations.hasKey(KEY_ANIMATION_END_ENTER)
+            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_ENTER))
+            : -1;
+        final int endExitAnimationId = animations.hasKey(KEY_ANIMATION_END_EXIT)
+            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_EXIT))
+            : -1;
+
+        if (startEnterAnimationId != -1 && startExitAnimationId != -1) {
+            builder.setStartAnimations(context, startEnterAnimationId, startExitAnimationId);
+        }
+
+        if (endEnterAnimationId != -1 && endExitAnimationId != -1) {
+            builder.setExitAnimations(context, endEnterAnimationId, endExitAnimationId);
+        }
     }
 
     // Complement the application name of the resource qualifier as necessary.
-    private int resolveAnimationIdentifierIfNeed(Context context, String identifier) {
+    private int resolveAnimationIdentifierIfNeeded(Context context, String identifier) {
         if (animationIdentifierPattern.matcher(identifier).find()) {
             return context.getResources().getIdentifier(identifier, null, null);
         } else {
