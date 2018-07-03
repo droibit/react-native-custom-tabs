@@ -57,6 +57,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_DEFAULT_SHARE_MENU_ITEM, KEY_DEFAULT_SHARE_MENU_ITEM);
         CONSTANTS.put(KEY_ANIMATIONS, KEY_ANIMATIONS);
         CONSTANTS.put(KEY_HEADERS, KEY_HEADERS);
+        CONSTANTS.put(FORCE_CLOSE_ON_REDIRECTION, FORCE_CLOSE_ON_REDIRECTION);
     }
 
     private static final String MODULE_NAME = "CustomTabsManager";
@@ -69,9 +70,6 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         super(reactContext);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getName() {
         return MODULE_NAME;
