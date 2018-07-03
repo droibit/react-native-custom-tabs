@@ -6,8 +6,12 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react-native": "0.42.3",
     "react": "15.4.2",
+    "react-native": "0.42.3",
     "react-native-custom-tabs": "file:.."
+  },
+  "devDependencies": {
+    "@types/react": "15.0.39",
+    "@types/react-native": "0.42.3"
   }
 }

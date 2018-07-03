@@ -1,5 +1,3 @@
-/// <reference path="../typings/index.d.ts" />
-
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native

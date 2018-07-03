@@ -1,6 +1,4 @@
 example/
-typings/
 .idea/
 .watchmanconfig
 .eslintrc
-typings.json
