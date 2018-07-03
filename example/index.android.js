@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -47,7 +47,7 @@ export default class Example extends Component {
           <TouchableHighlight
             underlayColor={'#CFD8DC'}
             onPress={() => this.openDefaultCustomTabs()}
-            style={{marginTop: 8}}>
+            style={{ marginTop: 8 }}>
             <Text style={styles.link}>
               https://www.google.com
             </Text>
@@ -58,7 +58,7 @@ export default class Example extends Component {
           <TouchableHighlight
             underlayColor={'#CFD8DC'}
             onPress={() => this.errorOccur()}
-            style={{marginTop: 8}}>
+            style={{ marginTop: 8 }}>
             <Text style={styles.link}>
               https://www.google.com
             </Text>

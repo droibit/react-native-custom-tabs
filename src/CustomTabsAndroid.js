@@ -5,8 +5,8 @@
  */
 'use strict';
 
-import {NativeModules} from 'react-native';
-import type {TabOption} from './TabOption';
+import { NativeModules } from 'react-native';
+import type { TabOption } from './TabOption';
 
 const CustomTabsManager = NativeModules.CustomTabsManager;
 
@@ -22,7 +22,7 @@ export default class CustomTabsAndroid {
    * @param url the Uri to be opened.
    * @param option the Option to customize Custom Tabs of look & feel.
    */
-  static openURL(url:string, option:TabOption = {}):Promise<boolean> {
+  static openURL(url: string, option: TabOption = {}): Promise<boolean> {
     return CustomTabsManager.openURL(url, option)
   }
 }

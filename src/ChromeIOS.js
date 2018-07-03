@@ -5,8 +5,8 @@
  */
 'use strict';
 
-import {NativeModules} from 'react-native';
-import type {TabOption} from './TabOption';
+import { NativeModules } from 'react-native';
+import type { TabOption } from './TabOption';
 
 const ChromeManager = NativeModules.DBChromeManager;
 
@@ -22,7 +22,7 @@ export default class ChromeIOS {
    * @param url the Uri to be opened.
    * @param option the Option in iOS is ignored
    */
-  static openURL(url:string, option:TabOption = {}):Promise<boolean> {
+  static openURL(url: string, option: TabOption = {}): Promise<boolean> {
     return ChromeManager.openURL(url)
   }
 }
