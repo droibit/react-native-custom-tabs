@@ -1,15 +1,15 @@
 require 'json'
 
-package = JSON.parse(File.read(File.join(__dir__, '../../node_modules/react-native-custom-tabs/package.json')))
+package = JSON.parse(File.read(File.join(__dir__, '../package.json')))
 
 Pod::Spec.new do |s|
   s.name                = "react-native-custom-tabs"
   s.version             = package['version']
-  s.author              = 'droibit'
+  s.author              = { "droibit" => "roomful.rooms@gmail.com" }
   s.license             = 'Apache'
   s.summary             = s.name
   s.homepage            = 'https://github.com/droibit/react-native-custom-tabs'
-  s.source              = { :git => 'https://github.com/droibit/react-native-custom-tabs', :commit => '630f54c7ead2e18fd22df94edb5ab5242b674948' }
+  s.source              = { :git => 'https://github.com/droibit/react-native-custom-tabs.git', :tag => "#{s.version}" }
   s.requires_arc        = true
   s.platform            = :ios, "8.0"
   s.pod_target_xcconfig = { "CLANG_CXX_LANGUAGE_STANDARD" => "c++14" }
