@@ -3,6 +3,7 @@ package com.github.droibit.android.reactnative.customtabs;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Browser;
 import android.support.customtabs.CustomTabsIntent;
@@ -43,6 +44,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     /* package */ static final String KEY_ANIMATIONS = "animations";
     @VisibleForTesting
     /* package */ static final String KEY_HEADERS = "headers";
+    @VisibleForTesting
+    /* package */ static final String FORCE_CLOSE_ON_REDIRECTION = "forceCloseOnRedirection";
 
     private static final Map<String, Object> CONSTANTS;
 
@@ -177,6 +180,12 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             }
         }
 
+        if (option.hasKey(FORCE_CLOSE_ON_REDIRECTION) &&
+                option.getBoolean(FORCE_CLOSE_ON_REDIRECTION)) {
+                  customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                  customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        
         return customTabsIntent;
     }
 
