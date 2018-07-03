@@ -75,6 +75,11 @@ export type TabOption = {
    * Sets any custom headers that should be used.
    */
     headers?: Object;
+
+  /**
+   * Workaround that Custom Tabs doesn't close on redirecting back to app scheme.
+   */
+  forceCloseOnRedirection?: boolean;
 };
 
 

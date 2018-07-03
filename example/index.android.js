@@ -77,7 +77,8 @@ export default class Example extends Component {
       enableUrlBarHiding: true,
       showPageTitle: true,
       enableDefaultShare: true,
-      animations: ANIMATIONS_SLIDE
+      animations: ANIMATIONS_SLIDE,
+      forceCloseOnRedirection: true,
     });
   }
 

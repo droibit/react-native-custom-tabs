@@ -104,7 +104,8 @@ CustomTabs.openURL(url, {
   animations: ANIMATIONS_SLIDE, // or ANIMATIONS_FADE
   headers: {
     'my-custom-header': 'my custom header value'
-  }
+  },
+  forceCloseOnRedirection: true,
 });
 ```
 
@@ -118,6 +119,8 @@ The option to support:
 |enableDefaultShare|boolean|undefined|Whether to add a default shared items of the menu.|
 |animations|Object|undefined|Sets the exit and start animations. ANIMATIONS_FADE, ANIMATIONS_SLIDE or custom object with string properties `startEnter`, `startExit`, `endEnter` and `endExit` each defining an Android animation resource ID to use for the animations, such as `com.github.droibit.android.reactnative.customtabs:anim/slide_in_right`.|
 |headers|Object|undefined|Sets any custom headers that should be used.|
+|forceCloseOnRedirection|boolean|undefined|Workaround that Custom Tabs doesn't close on redirecting back to app scheme.([#11](https://github.com/droibit/react-native-custom-tabs/pull/11))|
+
 
 `undefined` property is the default behavior of the Custom Tabs.
 
