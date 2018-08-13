@@ -1,7 +1,8 @@
 # React Native Custom Tabs
 [![npm version](https://badge.fury.io/js/react-native-custom-tabs.svg)](https://badge.fury.io/js/react-native-custom-tabs) [![Software License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](https://github.com/droibit/react-native-custom-tabs/blob/develop/LICENSE)
 
-Chrome Custom Tabs for React Native. Custom Tabs is supported only Chrome for Android. For this reason, the interface is the same, but the behavior is following:
+[Chrome Custom Tabs](https://developer.chrome.com/multidevice/android/customtabs) for React Native.   
+Custom Tabs is supported only for Android, so the behavior on each platform is bellow.
 
 * Android  
     If Chrome is installed, open the URL in Chrome that you have customized some of the look & feel. If it is not installed, open in other browser.
@@ -9,7 +10,7 @@ Chrome Custom Tabs for React Native. Custom Tabs is supported only Chrome for An
 * iOS  
     If Chrome is installed, open the URL in it. If it is not installed, open in Safari.
 
-Customization and detailed behavior refer to the Usage.
+Customization and detailed behavior refer to the [Usage](#Usage).
 
 ## Installation
 
@@ -25,7 +26,7 @@ rnpm link
 
 #### Android
 
-In Android, Add it in your **root** `build.gradle` at the end of repositories:
+In Android, Add it in your **root** `build.gradle`([e.g. example](https://github.com/droibit/react-native-custom-tabs/blob/develop/example/android/build.gradle)) at the end of repositories:
 
 ```groovy
 allprojects {
@@ -77,7 +78,7 @@ CustomTabs.openURL('https://www.google.com').then((launched: {boolean}) => {
 });
 ```
 
-#### Customized for Android
+#### Customize for Android
 
 You can customize the look & feel in Android. The following option is ignored in iOS.
 
@@ -92,16 +93,16 @@ CustomTabs.openURL(url, {
   enableUrlBarHiding: true,
   showPageTitle: true,
   enableDefaultShare: true,
-  // For value, specify only full qualifier(package:anim/name) or only resource name.
-  // In the case of the resource name, the module complements application package.
+  // Specify full animation resource identifier(package:anim/name)
+  // or only resource name(in case of animation bundled with app).
   animations: {
     startEnter: 'slide_in_bottom',
     startExit: 'slide_out_bottom',
     endEnter: 'slide_in_bottom',
     endExit: 'slide_out_bottom',
   },
-  // or
-  animations: ANIMATIONS_SLIDE, // or ANIMATIONS_FADE
+  // And supports SLIDE and FADE as default animation.
+  // animations: ANIMATIONS_SLIDE or ANIMATIONS_FADE.
   headers: {
     'my-custom-header': 'my custom header value'
   },
@@ -122,13 +123,14 @@ The option to support:
 |forceCloseOnRedirection|boolean|undefined|Workaround that Custom Tabs doesn't close on redirecting back to app scheme.([#11](https://github.com/droibit/react-native-custom-tabs/pull/11))|
 
 
-`undefined` property is the default behavior of the Custom Tabs.
+`undefined` property is default behavior of the Custom Tabs.
 
 Customize and default look & feel.  
 ![screenshot](http://i.imgur.com/0qE2E7a.gif)
 
 ## License
 
+    Copyright (C) 2015 The Android Open Source Project
     Copyright (C) 2016 Shinya Kumagai
 
     Licensed under the Apache License, Version 2.0 (the "License");
