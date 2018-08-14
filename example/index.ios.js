@@ -28,7 +28,7 @@ export default class Example extends Component {
         console.log(`Launched custom tabs: ${launched}`);
       })
       .catch(err => {
-        console.warn("An error occurred", err);
+        console.error(err, err.stack);
       });
   }
 }

@@ -72,9 +72,9 @@ export default class Example extends Component {
     this.openURL("https://facebook.github.io/react-native/");
   }
 
-  // TODO:
   errorOccur() {
-    this.openURL("https://www.google.com");
+    // Invalid url.
+    this.openURL("htt://www.google.com");
   }
 
   openURL(url, option) {
@@ -83,7 +83,7 @@ export default class Example extends Component {
         console.log(`Launched custom tabs: ${launched}`);
       })
       .catch(err => {
-        console.warn("An error occurred", err);
+        console.error(err, err.stack);
       });
   }
 }
