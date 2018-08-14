@@ -52,7 +52,7 @@ export default class Example extends Component {
   }
 
   openCustomizedCustomTabs() {
-    this.openGoogle({
+    this.openURL("https://www.google.com", {
       toolbarColor: "#607D8B",
       enableUrlBarHiding: true,
       showPageTitle: true,
@@ -69,18 +69,16 @@ export default class Example extends Component {
   }
 
   openDefaultCustomTabs() {
-    this.openGoogle();
+    this.openURL("https://facebook.github.io/react-native/");
   }
 
+  // TODO:
   errorOccur() {
-    this.openGoogle("https://www.google.com", {
-      //toolbarColor: '607D8B', // <--- Invalid toolbar color.
-      enableUrlBarHiding: "#607D8B", // <-- Type Error.
-    });
+    this.openURL("https://www.google.com");
   }
 
-  openGoogle(option) {
-    CustomTabs.openURL("https://www.google.com", option)
+  openURL(url, option) {
+    CustomTabs.openURL(url, option)
       .then(launched => {
         console.log(`Launched custom tabs: ${launched}`);
       })
