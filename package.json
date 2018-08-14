@@ -27,6 +27,7 @@
     "react-native": "*",
     "react": "*"
   },
+  "types": "src/index.d.ts",
   "devDependencies": {
     "@types/react": "^16.4.6",
     "@types/react-native": "^0.55.27",
