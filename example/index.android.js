@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -92,17 +86,17 @@ export default class Example extends Component {
   }
 
   errorOccur() {
-    this.openGoogle({
+    this.openGoogle('https://www.google.com', {
       //toolbarColor: '607D8B', // <--- Invalid toolbar color.
       enableUrlBarHiding: '#607D8B',  // <-- Type Error.
     })
   }
 
   openGoogle(option) {
-    CustomTabs.openURL('https://www.google.com', option).then((launched: boolean) => {
+    CustomTabs.openURL('https://www.google.com', option).then((launched) => {
       console.log(`Launched custom tabs: ${launched}`);
     }).catch(err => {
-      console.error(err)
+      console.warn("An error occurred", err);
     });
   }
 }

@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -33,10 +27,10 @@ export default class Example extends Component {
   }
 
   openGoogle() {
-    CustomTabs.openURL('https://www.google.com').then((launched: boolean) => {
+    CustomTabs.openURL('https://www.google.com').then((launched) => {
       console.log(`Launched custom tabs: ${launched}`);
     }).catch(err => {
-      console.error('An error occurred', err)
+      console.warn('An error occurred', err)
     });
   }
 }
