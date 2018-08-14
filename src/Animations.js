@@ -8,7 +8,7 @@ export const ANIMATIONS_SLIDE = {
   startEnter: "slide_in_right",
   startExit: "slide_out_left",
   endEnter: "android:anim/slide_in_left",
-  endExit: "android:anim/slide_out_right"
+  endExit: "android:anim/slide_out_right",
 };
 
 /**
@@ -19,5 +19,5 @@ export const ANIMATIONS_FADE = {
   startEnter: "android:anim/fade_in",
   startExit: "android:anim/fade_out",
   endEnter: "android:anim/fade_in",
-  endExit: "android:anim/fade_out"
+  endExit: "android:anim/fade_out",
 };

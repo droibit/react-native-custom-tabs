@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   AppRegistry,
   StyleSheet,
@@ -6,59 +6,46 @@ import {
   ToolbarAndroid,
   Text,
   TouchableHighlight,
-  View
-} from 'react-native';
+  View,
+} from "react-native";
 import {
   CustomTabs,
   ANIMATIONS_SLIDE,
-  ANIMATIONS_FADE
-} from 'react-native-custom-tabs';
+  ANIMATIONS_FADE,
+} from "react-native-custom-tabs";
 
 export default class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={'#455A64'} />
+        <StatusBar backgroundColor={"#455A64"} />
         <ToolbarAndroid
-          title={'React Native Custom Tabs'}
-          titleColor={'#FFFFFF'}
-          style={styles.toolbar} />
+          title={"React Native Custom Tabs"}
+          titleColor={"#FFFFFF"}
+          style={styles.toolbar}
+        />
         <View style={styles.textArea}>
-          <Text style={styles.welcome}>
-            Click on the link below!
-          </Text>
+          <Text style={styles.welcome}>Click on the link below!</Text>
           <TouchableHighlight
-            underlayColor={'#CFD8DC'}
-            onPress={() => this.openCustomizedCustomTabs()} >
-            <Text style={styles.link}>
-              https://www.google.com
-            </Text>
+            underlayColor={"#CFD8DC"}
+            onPress={() => this.openCustomizedCustomTabs()}>
+            <Text style={styles.link}>https://www.google.com</Text>
           </TouchableHighlight>
-          <Text>
-            (Customized Look & Feel)
-          </Text>
+          <Text>(Customized Look & Feel)</Text>
           <TouchableHighlight
-            underlayColor={'#CFD8DC'}
+            underlayColor={"#CFD8DC"}
             onPress={() => this.openDefaultCustomTabs()}
             style={{ marginTop: 8 }}>
-            <Text style={styles.link}>
-              https://www.google.com
-            </Text>
+            <Text style={styles.link}>https://www.google.com</Text>
           </TouchableHighlight>
-          <Text>
-            (Default Look & Feel)
-          </Text>
+          <Text>(Default Look & Feel)</Text>
           <TouchableHighlight
-            underlayColor={'#CFD8DC'}
+            underlayColor={"#CFD8DC"}
             onPress={() => this.errorOccur()}
             style={{ marginTop: 8 }}>
-            <Text style={styles.link}>
-              https://www.google.com
-            </Text>
+            <Text style={styles.link}>https://www.google.com</Text>
           </TouchableHighlight>
-          <Text>
-            (Error occur)
-          </Text>
+          <Text>(Error occur)</Text>
         </View>
       </View>
     );
@@ -66,7 +53,7 @@ export default class Example extends Component {
 
   openCustomizedCustomTabs() {
     this.openGoogle({
-      toolbarColor: '#607D8B',
+      toolbarColor: "#607D8B",
       enableUrlBarHiding: true,
       showPageTitle: true,
       enableDefaultShare: true,
@@ -86,43 +73,45 @@ export default class Example extends Component {
   }
 
   errorOccur() {
-    this.openGoogle('https://www.google.com', {
+    this.openGoogle("https://www.google.com", {
       //toolbarColor: '607D8B', // <--- Invalid toolbar color.
-      enableUrlBarHiding: '#607D8B',  // <-- Type Error.
-    })
+      enableUrlBarHiding: "#607D8B", // <-- Type Error.
+    });
   }
 
   openGoogle(option) {
-    CustomTabs.openURL('https://www.google.com', option).then((launched) => {
-      console.log(`Launched custom tabs: ${launched}`);
-    }).catch(err => {
-      console.warn("An error occurred", err);
-    });
+    CustomTabs.openURL("https://www.google.com", option)
+      .then(launched => {
+        console.log(`Launched custom tabs: ${launched}`);
+      })
+      .catch(err => {
+        console.warn("An error occurred", err);
+      });
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   textArea: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     margin: 10,
   },
   link: {
-    color: 'crimson',
+    color: "crimson",
   },
   toolbar: {
-    backgroundColor: '#607D8B',
-    height: 56
-  }
+    backgroundColor: "#607D8B",
+    height: 56,
+  },
 });
 
-AppRegistry.registerComponent('Example', () => Example);
+AppRegistry.registerComponent("Example", () => Example);

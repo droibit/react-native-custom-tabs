@@ -2,7 +2,6 @@
  * Utility class for opening http or https URL in Custom Tabs.
  */
 export class CustomTabs {
-
   /**
    * Opens the URL on Custom Tab.
    *
@@ -16,7 +15,6 @@ export class CustomTabs {
  * Options to customize Custom Tabs of look & feel.
  */
 export interface TabOption {
-
   /**
    * the Toolbar color.
    * Supported formats are: #RRGGBB, #AARRGGBB, etc.
@@ -69,7 +67,7 @@ export interface Animations {
   startEnter: string;
   startExit: string;
   endEnter: string;
-  endExit: string; 
+  endExit: string;
 }
 
 /**

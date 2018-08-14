@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import { NativeModules } from 'react-native';
+import { NativeModules } from "react-native";
 
 const ChromeManager = NativeModules.DBChromeManager;
 
@@ -9,8 +9,8 @@ const ChromeManager = NativeModules.DBChromeManager;
  * If Chrome is not installed, opens the URL in safari.
  */
 export default class CustomTabs {
-
+  /* eslint no-unused-vars: 0 */
   static openURL(url, option = {}) {
-    return ChromeManager.openURL(url)
+    return ChromeManager.openURL(url);
   }
 }

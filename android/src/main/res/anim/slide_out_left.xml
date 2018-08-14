@@ -11,6 +11,8 @@
      limitations under the License.
 -->
 <set xmlns:android="http://schemas.android.com/apk/res/android">
-    <translate android:fromXDelta="0" android:toXDelta="-100%p"
-        android:duration="@android:integer/config_mediumAnimTime"/>
+  <translate
+      android:duration="@android:integer/config_mediumAnimTime"
+      android:fromXDelta="0"
+      android:toXDelta="-100%p"/>
 </set>

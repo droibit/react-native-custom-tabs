@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-import { NativeModules } from 'react-native';
+import { NativeModules } from "react-native";
 
 const CustomTabsManager = NativeModules.CustomTabsManager;
 
@@ -9,8 +9,7 @@ const CustomTabsManager = NativeModules.CustomTabsManager;
  * If Chrome is not installed, opens the URL in other browser.
  */
 export default class CustomTabs {
-
   static openURL(url, option = {}) {
-    return CustomTabsManager.openURL(url, option)
+    return CustomTabsManager.openURL(url, option);
   }
 }
