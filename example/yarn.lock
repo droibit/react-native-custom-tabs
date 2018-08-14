@@ -3175,8 +3175,9 @@ react-devtools-core@3.1.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-"react-native-custom-tabs@file:..":
-  version "0.1.7"
+"react-native-custom-tabs@link:..":
+  version "0.0.0"
+  uid ""
 
 react-native@0.55.4:
   version "0.55.4"
