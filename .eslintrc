@@ -4,15 +4,15 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:prettier/recommended"
+    "prettier"
   ],
   "parser": "babel-eslint",
   "plugins": [
     "prettier"
   ],
   "rules": {
-    "prettier": [
-      true,
+    "prettier/prettier": [
+      "error",
       {
         "printWidth": 80,
         "singleQuote": false,

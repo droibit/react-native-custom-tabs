@@ -1,6 +1,7 @@
 {
   "files.autoSave": "afterDelay",
   "editor.tabSize": 2,
-
+  "javascript.format.enable": false,
+  "prettier.eslintIntegration": true,
   "react-native-tools.projectRoot": "./example"
 }
