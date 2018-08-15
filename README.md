@@ -59,6 +59,15 @@ ext {
 
 ref. [example](https://github.com/droibit/react-native-custom-tabs/blob/develop/example/android/build.gradle#L29-L34)
 
+#### iOS
+
+If you support iOS 9 or higher, you need to add the `LSApplicationQueriesSchemes` key and the following scheme to info.plist of your app.
+
+* `googlechrome`
+* `googlechromes`
+
+ref. https://developer.apple.com/documentation/uikit/uiapplication/1622952-canopenurl
+
 ## Usage
 
 Open the URL as `Linking` of React Native.
