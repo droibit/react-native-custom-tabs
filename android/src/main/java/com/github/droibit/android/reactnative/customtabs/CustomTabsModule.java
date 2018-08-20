@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Browser;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
 import com.droibit.android.customtabs.launcher.CustomTabsLauncher;
@@ -22,7 +23,6 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.common.annotations.VisibleForTesting;
 import java.util.Map;
 import java.util.regex.Pattern;
-import javax.annotation.Nullable;
 
 /**
  * CustomTabs module.
@@ -41,17 +41,23 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
   private static final String KEY_ANIMATION_END_ENTER = "endEnter";
   private static final String KEY_ANIMATION_END_EXIT = "endExit";
 
+  private static final String ANIMATION_SLIDE_IN_RIGHT = "ANIMATION_SLIDE_IN_RIGHT";
+  private static final String ANIMATION_SLIDE_OUT_RIGHT = "ANIMATION_SLIDE_OUT_RIGHT";
+  private static final String ANIMATION_SLIDE_IN_LEFT = "ANIMATION_SLIDE_IN_LEFT";
+  private static final String ANIMATION_SLIDE_OUT_LEFT = "ANIMATION_SLIDE_OUT_LEFT";
+  private static final String ANIMATION_FADE_IN = "ANIMATION_FADE_IN";
+  private static final String ANIMATION_FADE_OUT = "ANIMATION_FADE_OUT";
+
   private static final Map<String, Object> CONSTANTS;
 
   static {
     CONSTANTS = MapBuilder.newHashMap();
-    CONSTANTS.put(KEY_TOOLBAR_COLOR, KEY_TOOLBAR_COLOR);
-    CONSTANTS.put(KEY_ENABLE_URL_BAR_HIDING, KEY_ENABLE_URL_BAR_HIDING);
-    CONSTANTS.put(KEY_SHOW_PAGE_TITLE, KEY_SHOW_PAGE_TITLE);
-    CONSTANTS.put(KEY_DEFAULT_SHARE_MENU_ITEM, KEY_DEFAULT_SHARE_MENU_ITEM);
-    CONSTANTS.put(KEY_ANIMATIONS, KEY_ANIMATIONS);
-    CONSTANTS.put(KEY_HEADERS, KEY_HEADERS);
-    CONSTANTS.put(KEY_FORCE_CLOSE_ON_REDIRECTION, KEY_FORCE_CLOSE_ON_REDIRECTION);
+    CONSTANTS.put(ANIMATION_SLIDE_IN_RIGHT, "slide_in_right");
+    CONSTANTS.put(ANIMATION_SLIDE_OUT_RIGHT, "android:anim/slide_out_right");
+    CONSTANTS.put(ANIMATION_SLIDE_IN_LEFT, "android:anim/slide_in_left");
+    CONSTANTS.put(ANIMATION_SLIDE_OUT_LEFT, "slide_out_left");
+    CONSTANTS.put(ANIMATION_FADE_IN, "android:anim/fade_in");
+    CONSTANTS.put(ANIMATION_FADE_OUT, "android:anim/fade_out");
   }
 
   private static final String MODULE_NAME = "CustomTabsManager";
@@ -69,8 +75,6 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     return MODULE_NAME;
   }
 
-  @Nullable
-  @Override
   public Map<String, Object> getConstants() {
     return CONSTANTS;
   }
@@ -115,8 +119,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     }
   }
 
-  @VisibleForTesting
-  CustomTabsIntent buildIntent(Context context,
+  private CustomTabsIntent buildIntent(Context context,
       CustomTabsIntent.Builder builder,
       ReadableMap option) {
     if (option.hasKey(KEY_TOOLBAR_COLOR)) {
@@ -139,8 +142,6 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         option.getBoolean(KEY_DEFAULT_SHARE_MENU_ITEM)) {
       builder.addDefaultShareMenuItem();
     }
-
-    // TODO: If it does not launch Chrome, animation is unnecessary?
 
     if (option.hasKey(KEY_ANIMATIONS)) {
       final ReadableMap animations = option.getMap(KEY_ANIMATIONS);
@@ -182,35 +183,35 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     return customTabsIntent;
   }
 
-  @VisibleForTesting
-  boolean httpOrHttpsScheme(String url) {
+  private boolean httpOrHttpsScheme(String url) {
     return url.startsWith("http") || url.startsWith("https");
   }
 
-  @VisibleForTesting
-  void applyAnimation(Context context, CustomTabsIntent.Builder builder,
-      ReadableMap animations) {
-    final int startEnterAnimationId = animations.hasKey(KEY_ANIMATION_START_ENTER)
+  private void applyAnimation(
+      @NonNull Context context,
+      @NonNull CustomTabsIntent.Builder destBuilder,
+      @NonNull ReadableMap srcAnimations) {
+    final int startEnterAnimationId = srcAnimations.hasKey(KEY_ANIMATION_START_ENTER)
         ? resolveAnimationIdentifierIfNeeded(context,
-        animations.getString(KEY_ANIMATION_START_ENTER))
+        srcAnimations.getString(KEY_ANIMATION_START_ENTER))
         : -1;
-    final int startExitAnimationId = animations.hasKey(KEY_ANIMATION_START_EXIT)
+    final int startExitAnimationId = srcAnimations.hasKey(KEY_ANIMATION_START_EXIT)
         ? resolveAnimationIdentifierIfNeeded(context,
-        animations.getString(KEY_ANIMATION_START_EXIT))
+        srcAnimations.getString(KEY_ANIMATION_START_EXIT))
         : -1;
-    final int endEnterAnimationId = animations.hasKey(KEY_ANIMATION_END_ENTER)
-        ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_ENTER))
+    final int endEnterAnimationId = srcAnimations.hasKey(KEY_ANIMATION_END_ENTER)
+        ? resolveAnimationIdentifierIfNeeded(context, srcAnimations.getString(KEY_ANIMATION_END_ENTER))
         : -1;
-    final int endExitAnimationId = animations.hasKey(KEY_ANIMATION_END_EXIT)
-        ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_EXIT))
+    final int endExitAnimationId = srcAnimations.hasKey(KEY_ANIMATION_END_EXIT)
+        ? resolveAnimationIdentifierIfNeeded(context, srcAnimations.getString(KEY_ANIMATION_END_EXIT))
         : -1;
 
     if (startEnterAnimationId != -1 && startExitAnimationId != -1) {
-      builder.setStartAnimations(context, startEnterAnimationId, startExitAnimationId);
+      destBuilder.setStartAnimations(context, startEnterAnimationId, startExitAnimationId);
     }
 
     if (endEnterAnimationId != -1 && endExitAnimationId != -1) {
-      builder.setExitAnimations(context, endEnterAnimationId, endExitAnimationId);
+      destBuilder.setExitAnimations(context, endEnterAnimationId, endExitAnimationId);
     }
   }
 
