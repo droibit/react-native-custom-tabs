@@ -32,19 +32,6 @@ react-native link react-native-custom-tabs
 
 #### Android
 
-In Android, Add it in your **root** `build.gradle` at the end of repositories:
-
-```groovy
-allprojects {
-    repositories {
-        ...
-        maven { url "https://jitpack.io" }
-    }
-}
-```
-
-ref. [example](https://github.com/droibit/react-native-custom-tabs/blob/develop/example/android/build.gradle#L25)
-
 If you want to change the dependency version of this library, add the necessary properties to **root** `build.gradle`.
 
 ```
@@ -70,10 +57,10 @@ ref. https://developer.apple.com/documentation/uikit/uiapplication/1622952-canop
 
 ## Usage
 
-Open the URL as `Linking` of React Native.
+Open the URL like `Linking` of React Native.
 
 ```javascript
-CustomTabs.openURL('https://www.google.com').then((launched: {boolean}) => {
+CustomTabs.openURL('https://www.google.com').then(launched => {
   console.log(`Launched custom tabs: ${launched}`);
 }).catch(err => {
   console.error(err)
@@ -109,7 +96,7 @@ CustomTabs.openURL(url, {
   headers: {
     "my-custom-header": "my custom header value"
   },
-  forceCloseOnRedirection: true
+  forceCloseOnRedirection: true,
 });
 ```
 
