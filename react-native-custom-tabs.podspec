@@ -1,6 +1,6 @@
 require 'json'
 
-package = JSON.parse(File.read(File.join(__dir__, '../package.json')))
+package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
   s.name                = "react-native-custom-tabs"
@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   s.header_dir          = 'ios'
   s.preserve_paths      = "ios/**"
   s.dependency      'React'
-  s.source_files  = "ios/**/*.{h,m}"
+  s.source_files        = 'ios/**/*.{h,m}'
+  s.exclude_files       = 'android/**/*'
   s.libraries     = "stdc++"
 end
