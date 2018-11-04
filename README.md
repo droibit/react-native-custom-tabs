@@ -71,6 +71,8 @@ dependencies {
 Open the URL as `Linking` of React Native.
 
 ```javascript
+import { CustomTabs } from 'react-native-custom-tabs';
+
 CustomTabs.openURL('https://www.google.com').then((launched: {boolean}) => {
   console.log(`Launched custom tabs: ${launched}`);
 }).catch(err => {
