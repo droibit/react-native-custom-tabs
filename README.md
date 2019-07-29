@@ -1,3 +1,5 @@
+# Everything is same except updated app/build.gradle
+
 # React Native Custom Tabs
 [![npm version](https://badge.fury.io/js/react-native-custom-tabs.svg)](https://badge.fury.io/js/react-native-custom-tabs) [![Software License](https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg)](https://github.com/droibit/react-native-custom-tabs/blob/develop/LICENSE)
 
