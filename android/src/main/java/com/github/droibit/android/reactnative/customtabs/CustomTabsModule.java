@@ -3,11 +3,11 @@ package com.github.droibit.android.reactnative.customtabs;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Browser;
-import android.support.customtabs.CustomTabsIntent;
+// import android.support.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
+import androidx.browser.customtabs.CustomTabsIntent;
 
 import com.droibit.android.customtabs.launcher.CustomTabsLauncher;
 import com.facebook.react.bridge.JSApplicationIllegalArgumentException;
@@ -22,10 +22,15 @@ import com.facebook.react.bridge.UnexpectedNativeTypeException;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.common.annotations.VisibleForTesting;
 
+
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.content.res.Resources;
+import android.R.drawable;
 
 /**
  * CustomTabs module.
@@ -43,6 +48,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     private static final String KEY_ANIMATION_START_EXIT = "startExit";
     private static final String KEY_ANIMATION_END_ENTER = "endEnter";
     private static final String KEY_ANIMATION_END_EXIT = "endExit";
+    private static final String KEY_BACKBUTTON = "backButton";
+    private static final String KEY_BACKBUTTONCOLOR = "backButtonColor";
+    private static final String KEY_BACKBUTTONICON = "backButtonIcon";
 
     private static final Map<String, Object> CONSTANTS;
 
@@ -55,6 +63,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         CONSTANTS.put(KEY_ANIMATIONS, KEY_ANIMATIONS);
         CONSTANTS.put(KEY_HEADERS, KEY_HEADERS);
         CONSTANTS.put(KEY_FORCE_CLOSE_ON_REDIRECTION, KEY_FORCE_CLOSE_ON_REDIRECTION);
+        CONSTANTS.put(KEY_BACKBUTTON, KEY_BACKBUTTON);
+        CONSTANTS.put(KEY_BACKBUTTONCOLOR, KEY_BACKBUTTONCOLOR);
+        CONSTANTS.put(KEY_BACKBUTTONICON, KEY_BACKBUTTONICON);
     }
 
     private static final String MODULE_NAME = "CustomTabsManager";
@@ -67,6 +78,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         super(reactContext);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return MODULE_NAME;
@@ -103,7 +117,8 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             );
             final Activity activity = getCurrentActivity();
             if (activity != null) {
-                CustomTabsLauncher.launch(activity, customTabsIntent, url);
+                // CustomTabsLauncher.launch(activity, customTabsIntent, url);
+                CustomTabsLauncher.launch(activity, customTabsIntent, android.net.Uri.parse(url));
                 promise.resolve(true);
             } else {
                 promise.resolve(false);
@@ -118,9 +133,9 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
     }
 
     @VisibleForTesting
-    /* package */ CustomTabsIntent buildIntent(Context context,
-                                               CustomTabsIntent.Builder builder,
-                                               ReadableMap option) {
+        /* package */ CustomTabsIntent buildIntent(Context context,
+                                                   CustomTabsIntent.Builder builder,
+                                                   ReadableMap option) {
         if (option.hasKey(KEY_TOOLBAR_COLOR)) {
             final String colorString = option.getString(KEY_TOOLBAR_COLOR);
             try {
@@ -130,6 +145,30 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
                         "Invalid toolbar color '" + colorString + "': " + e.getMessage());
             }
         }
+        //KEY_BACKBUTTON
+        if (option.hasKey(KEY_BACKBUTTON) && option.getBoolean(KEY_BACKBUTTON)) {
+            Resources res = context.getResources();
+            String packageName = context.getPackageName();
+            String icon = "ic_chevron_left_black_24dp";
+            if (option.hasKey(KEY_BACKBUTTONCOLOR)) {
+                String color = option.getString(KEY_BACKBUTTONCOLOR);
+                icon = color.equalsIgnoreCase("light") ? "ic_chevron_left_white_24dp" : "ic_chevron_left_black_24dp";
+            }
+            int iconId = res.getIdentifier(icon, "mipmap", packageName);
+            Bitmap iconBitMap = BitmapFactory.decodeResource(res, iconId);
+            builder.setCloseButtonIcon(iconBitMap);
+        }
+
+        //KEY_BACKBUTTONICON
+        if (option.hasKey(KEY_BACKBUTTONICON)) {
+            Resources res = context.getResources();
+            String packageName = context.getPackageName();
+            String icon = !option.getString(KEY_BACKBUTTONICON).equals("") ? option.getString(KEY_BACKBUTTONICON) : "ic_chevron_left_black_24dp";
+            int iconId = res.getIdentifier(icon, "mipmap", packageName);
+            Bitmap iconBitMap = BitmapFactory.decodeResource(res, iconId);
+            builder.setCloseButtonIcon(iconBitMap);
+        }
+
         if (option.hasKey(KEY_ENABLE_URL_BAR_HIDING) &&
                 option.getBoolean(KEY_ENABLE_URL_BAR_HIDING)) {
             builder.enableUrlBarHiding();
@@ -177,32 +216,33 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
 
         if (option.hasKey(KEY_FORCE_CLOSE_ON_REDIRECTION) &&
                 option.getBoolean(KEY_FORCE_CLOSE_ON_REDIRECTION)) {
-                  customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                  customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
-        
+
         return customTabsIntent;
     }
 
     @VisibleForTesting
-    /* package */ boolean httpOrHttpsScheme(String url) {
+        /* package */ boolean httpOrHttpsScheme(String url) {
         return url.startsWith("http") || url.startsWith("https");
     }
 
+    /**
     @VisibleForTesting
-    /* package */ void applyAnimation(Context context, CustomTabsIntent.Builder builder, ReadableMap animations) {
+        /* package *\/ void applyAnimation(Context context, CustomTabsIntent.Builder builder, ReadableMap animations) {
         final int startEnterAnimationId = animations.hasKey(KEY_ANIMATION_START_ENTER)
-            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_START_ENTER))
-            : -1;
+                ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_START_ENTER))
+                : -1;
         final int startExitAnimationId = animations.hasKey(KEY_ANIMATION_START_EXIT)
-            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_START_EXIT))
-            : -1;
+                ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_START_EXIT))
+                : -1;
         final int endEnterAnimationId = animations.hasKey(KEY_ANIMATION_END_ENTER)
-            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_ENTER))
-            : -1;
+                ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_ENTER))
+                : -1;
         final int endExitAnimationId = animations.hasKey(KEY_ANIMATION_END_EXIT)
-            ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_EXIT))
-            : -1;
+                ? resolveAnimationIdentifierIfNeeded(context, animations.getString(KEY_ANIMATION_END_EXIT))
+                : -1;
 
         if (startEnterAnimationId != -1 && startExitAnimationId != -1) {
             builder.setStartAnimations(context, startEnterAnimationId, startExitAnimationId);
@@ -211,6 +251,19 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
         if (endEnterAnimationId != -1 && endExitAnimationId != -1) {
             builder.setExitAnimations(context, endEnterAnimationId, endExitAnimationId);
         }
+    }
+    **/
+
+    @VisibleForTesting
+        /* package */ void applySlideAnimation(Context context, CustomTabsIntent.Builder builder) {
+        builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
+                .setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+    }
+
+    @VisibleForTesting
+        /* package */ void applyFadeAnimation(Context context, CustomTabsIntent.Builder builder) {
+        builder.setStartAnimations(context, android.R.anim.fade_in, android.R.anim.fade_out)
+                .setExitAnimations(context, android.R.anim.fade_out, android.R.anim.fade_in);
     }
 
     // Complement the application name of the resource qualifier as necessary.
