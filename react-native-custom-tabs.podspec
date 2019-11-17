@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { "CLANG_CXX_LANGUAGE_STANDARD" => "c++14" }
   s.header_dir          = 'ios'
   s.preserve_paths      = "ios/**"
-  s.dependency          = 'React'
+  s.dependency          'React'
   s.source_files        = 'ios/**/*.{h,m}'
   s.exclude_files       = 'android/**/*'
   s.libraries     = "stdc++"
