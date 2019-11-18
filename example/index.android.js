@@ -20,53 +20,55 @@ import {
   ANIMATIONS_FADE
 } from 'react-native-custom-tabs';
 
-export default class Example extends Component {
+import type {TabOption} from 'react-native-custom-tabs';
+
+class Example extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor={'#455A64'} />
-        <ToolbarAndroid
-          title={'React Native Custom Tabs'}
-          titleColor={'#FFFFFF'}
-          style={styles.toolbar} />
-        <View style={styles.textArea}>
-          <Text style={styles.welcome}>
-            Click on the link below!
-          </Text>
-          <TouchableHighlight
-            underlayColor={'#CFD8DC'}
-            onPress={() => this.openCustomizedCustomTabs()} >
-            <Text style={styles.link}>
-              https://www.google.com
+        <View style={styles.container}>
+          <StatusBar backgroundColor={'#455A64'} />
+          <ToolbarAndroid
+              title={'React Native Custom Tabs'}
+              titleColor={'#FFFFFF'}
+              style={styles.toolbar} />
+          <View style={styles.textArea}>
+            <Text style={styles.welcome}>
+              Click on the link below!
             </Text>
-          </TouchableHighlight>
-          <Text>
-            (Customized Look & Feel)
-          </Text>
-          <TouchableHighlight
-            underlayColor={'#CFD8DC'}
-            onPress={() => this.openDefaultCustomTabs()}
-            style={{ marginTop: 8 }}>
-            <Text style={styles.link}>
-              https://www.google.com
+            <TouchableHighlight
+                underlayColor={'#CFD8DC'}
+                onPress={() => this.openCustomizedCustomTabs()} >
+              <Text style={styles.link}>
+                https://www.google.com
+              </Text>
+            </TouchableHighlight>
+            <Text>
+              (Customized Look & Feel)
             </Text>
-          </TouchableHighlight>
-          <Text>
-            (Default Look & Feel)
-          </Text>
-          <TouchableHighlight
-            underlayColor={'#CFD8DC'}
-            onPress={() => this.errorOccur()}
-            style={{ marginTop: 8 }}>
-            <Text style={styles.link}>
-              https://www.google.com
+            <TouchableHighlight
+                underlayColor={'#CFD8DC'}
+                onPress={() => this.openDefaultCustomTabs()}
+                style={{marginTop: 8}}>
+              <Text style={styles.link}>
+                https://www.google.com
+              </Text>
+            </TouchableHighlight>
+            <Text>
+              (Default Look & Feel)
             </Text>
-          </TouchableHighlight>
-          <Text>
-            (Error occur)
-          </Text>
+            <TouchableHighlight
+                underlayColor={'#CFD8DC'}
+                onPress={() => this.errorOccur()}
+                style={{marginTop: 8}}>
+              <Text style={styles.link}>
+                https://www.google.com
+              </Text>
+            </TouchableHighlight>
+            <Text>
+              (Error occur)
+            </Text>
+          </View>
         </View>
-      </View>
     );
   }
 
@@ -76,14 +78,10 @@ export default class Example extends Component {
       enableUrlBarHiding: true,
       showPageTitle: true,
       enableDefaultShare: true,
-      animations: ANIMATIONS_FADE,
-      // animations: {
-      //   startEnter: 'slide_up',
-      //   startExit: 'android:anim/fade_out',
-      //   endEnter: 'android:anim/fade_in',
-      //   endExit: 'slide_down',
-      // },
-      forceCloseOnRedirection: true,
+      animations: ANIMATIONS_SLIDE,
+      backButton:true,
+      backButtonColor:'light',
+      backButtonIcon:'ic_arrow_back_white_24dp'
     });
   }
 
@@ -98,7 +96,7 @@ export default class Example extends Component {
     })
   }
 
-  openGoogle(option) {
+  openGoogle(option: ?TabOption) {
     CustomTabs.openURL('https://www.google.com', option).then((launched: boolean) => {
       console.log(`Launched custom tabs: ${launched}`);
     }).catch(err => {

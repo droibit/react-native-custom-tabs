@@ -1,6 +1,6 @@
 {
   "name": "react-native-custom-tabs",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Chrome Custom Tabs for React Native.",
   "keywords": [
     "react-native",
@@ -8,16 +8,16 @@
     "custom-tabs"
   ],
   "author": {
-    "name": "Shinya Kumagai",
-    "email": "roomful.rooms@gmail.com"
+    "name": "Patrick LUZOLO",
+    "email": "eldorplus@gmail.com"
   },
-  "homepage": "https://github.com/droibit/react-native-custom-tabs",
+  "homepage": "https://github.com/eldorplus/react-native-custom-tabs",
   "bugs": {
-    "url": "https://github.com/droibit/react-native-custom-tabs/issues"
+    "url": "https://github.com/eldorplus/react-native-custom-tabs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/droibit/react-native-custom-tabs"
+    "url": "https://github.com/eldorplus/react-native-custom-tabs"
   },
   "license": "Apache-2.0",
   "scripts": {
@@ -28,12 +28,12 @@
     "react": "*"
   },
   "devDependencies": {
-    "react-native": "0.42.3",
-    "react": "15.4.2",
-    "babel-preset-react-native": "1.x.x",
-    "eslint": "3.x.x",
-    "eslint-plugin-babel": "3.x.x",
-    "eslint-plugin-react": "6.x.x",
-    "eslint-plugin-react-native": "2.x.x"
+    "react-native": "^0.61.2",
+    "react": "16.10.2",
+    "babel-preset-react-native": "^4.0.1",
+    "eslint": "^6.5.1",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-native": "^3.7.0"
   }
 }
