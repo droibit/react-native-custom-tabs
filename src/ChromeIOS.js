@@ -6,8 +6,9 @@
 'use strict';
 
 import { NativeModules } from 'react-native';
-import type { TabOption } from './TabOption';
+import { isAvailable } from "./SafariController";
 
+const NativeSafariViewManager = NativeModules.SafariViewManager;
 const ChromeManager = NativeModules.DBChromeManager;
 
 /**
@@ -20,9 +21,13 @@ export default class ChromeIOS {
    * Opens the URL on a Chrome.
    *
    * @param url the Uri to be opened.
-   * @param option the Option in iOS is ignored
+   * @param inAppSafari the inAppSafari bool to toggle between inapp safari and default behaviour
    */
-  static openURL(url: string, option: TabOption = {}): Promise<boolean> {
-    return ChromeManager.openURL(url)
+  static openURL(url:string, inAppSafari = true):Promise<boolean> {
+    if (inAppSafari && isAvailable) {
+      return NativeSafariViewManager.show({url});
+    } else {
+      return ChromeManager.openURL(url);
+    }
   }
 }
