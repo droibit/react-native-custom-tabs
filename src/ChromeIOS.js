@@ -30,4 +30,8 @@ export default class ChromeIOS {
       return ChromeManager.openURL(url);
     }
   }
+  
+  static dismiss() {
+    NativeSafariViewManager.dismiss();
+  }
 }
