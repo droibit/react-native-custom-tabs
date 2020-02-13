@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Browser;
-import android.support.customtabs.CustomTabsIntent;
+import androidx.browser.customtabs.CustomTabsIntent;
 import android.text.TextUtils;
 
 import com.droibit.android.customtabs.launcher.CustomTabsLauncher;
@@ -103,7 +103,7 @@ public class CustomTabsModule extends ReactContextBaseJavaModule {
             );
             final Activity activity = getCurrentActivity();
             if (activity != null) {
-                CustomTabsLauncher.launch(activity, customTabsIntent, url);
+                CustomTabsLauncher.launch(activity, customTabsIntent, android.net.Uri.parse(url));
                 promise.resolve(true);
             } else {
                 promise.resolve(false);
