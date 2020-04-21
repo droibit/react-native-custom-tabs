@@ -8,7 +8,7 @@ Custom Tabs is supported only for Android, so the behavior on each platform is b
     If Chrome is installed, open the URL in Chrome that you have customized some of the look & feel. If it is not installed, open in other browser.
 
 * iOS  
-    If Chrome is installed, open the URL in it. If it is not installed, open in Safari.
+    Presents SafariViewController by default for iOS >9.0. Else opens in Safari.
 
 Customization and detailed behavior refer to the [Usage](#Usage).
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BBADAF32239FC95A00E94359 /* SafariViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BBADAF31239FC95A00E94359 /* SafariViewManager.m */; };
 		DA7118851CC916080087DF95 /* DBChromeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7118551CC90B700087DF95 /* DBChromeManager.m */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BBADAF30239FC95A00E94359 /* SafariViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SafariViewManager.h; path = ReactNativeCustomTabs/SafariViewManager.h; sourceTree = "<group>"; };
+		BBADAF31239FC95A00E94359 /* SafariViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SafariViewManager.m; path = ReactNativeCustomTabs/SafariViewManager.m; sourceTree = "<group>"; };
 		DA7118541CC90B700087DF95 /* DBChromeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBChromeManager.h; path = ReactNativeCustomTabs/DBChromeManager.h; sourceTree = "<group>"; };
 		DA7118551CC90B700087DF95 /* DBChromeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBChromeManager.m; path = ReactNativeCustomTabs/DBChromeManager.m; sourceTree = "<group>"; };
 		DA7118681CC9158A0087DF95 /* libDBCustomTabs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDBCustomTabs.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +45,8 @@
 		13B07FAE1A68108700A75B9A /* ReactNativeCustomTabs */ = {
 			isa = PBXGroup;
 			children = (
+				BBADAF30239FC95A00E94359 /* SafariViewManager.h */,
+				BBADAF31239FC95A00E94359 /* SafariViewManager.m */,
 				DA7118541CC90B700087DF95 /* DBChromeManager.h */,
 				DA7118551CC90B700087DF95 /* DBChromeManager.m */,
 			);
@@ -106,6 +111,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
@@ -123,6 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBADAF32239FC95A00E94359 /* SafariViewManager.m in Sources */,
 				DA7118851CC916080087DF95 /* DBChromeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,6 +233,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../react-native/React/**/**",
+					"$(SRCROOT)/../../react-native/React/**",
+					"${SRCROOT}/../../../ios/Pods/Headers/Public/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -242,6 +251,8 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../react-native/React/**/**",
+					"$(SRCROOT)/../../react-native/React/**",
+					"${SRCROOT}/../../../ios/Pods/Headers/Public/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
