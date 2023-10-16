@@ -1,23 +1,19 @@
 apply plugin: "com.android.library"
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion rootProject.ext.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 33
+    buildToolsVersion rootProject.ext.hasProperty('buildToolsVersion') ? rootProject.ext.buildToolsVersion : "33.0.0"
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion rootProject.ext.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 23
+        targetSdkVersion rootProject.ext.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 33
         versionCode 1
         versionName "1.0"
     }
 }
 
 dependencies {
-    compile "com.facebook.react:react-native:+"  // From node_modules
-    compile 'com.android.support:customtabs:25.0.1'
-    compile ('com.github.droibit.customtabslauncher:launcher:1.0.8') {
-        exclude module: 'customtabs'
-    }
-
-    testCompile 'junit:junit:4.12'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'androidx.browser:browser:1.5.0'
+    implementation 'com.github.droibit.customtabslauncher:launcher:1.0.8'
 }
