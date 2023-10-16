@@ -13,11 +13,7 @@ android {
 }
 
 dependencies {
-    compile "com.facebook.react:react-native:+"  // From node_modules
-    compile 'com.android.support:customtabs:25.0.1'
-    compile ('com.github.droibit.customtabslauncher:launcher:1.0.8') {
-        exclude module: 'customtabs'
-    }
-
-    testCompile 'junit:junit:4.12'
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'androidx.browser:browser:1.5.0'
+    implementation 'com.github.droibit.customtabslauncher:launcher:1.0.8'
 }
